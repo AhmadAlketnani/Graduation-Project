@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashborad;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard\Store;

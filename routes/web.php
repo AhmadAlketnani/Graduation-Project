@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Dashborad\StoreController;
+use App\Http\Controllers\Dashboard\StoreController;
 use Illuminate\Support\Facades\Route;
 
 
