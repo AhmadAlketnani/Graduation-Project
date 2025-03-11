@@ -24,7 +24,7 @@ class Store extends Model
     }
 
     // scopes----------------------------------------------
-    public function scopeSearch($query, $search)
+    public function scopeWhenSearch($query, $search)
     {
         return $query->where('name', 'like', '%' . $search . '%')
             ->orWhere('email', 'like', '%' . $search . '%')
