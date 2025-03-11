@@ -17,48 +17,13 @@
             </a>
         </li>
         {{-- pages sectin  --}}
-       {{--  <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'pages') active @endif" href="{{ route('pages.index') }}">
-                <i class="app-menu__icon bi bi-newspaper"></i>
-                    <span class="app-menu__label">Pages</span>
+         <li>
+            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('stores.index') }}">
+                <i class="app-menu__icon bi bi-shop"></i>
+                    <span class="app-menu__label">Stores</span>
             </a>
         </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'sections') active @endif" href="{{ route('sections.index') }}">
-                <i class="app-menu__icon bi bi-card-list"></i>
-                    <span class="app-menu__label">Sections</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'services') active @endif" href="{{ route('services.index') }}">
-                <i class="app-menu__icon bi bi-grid-3x3-gap"></i>
-                    <span class="app-menu__label">Services</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'technologies') active @endif" href="{{ route('technologies.index') }}">
-                <i class="app-menu__icon bi bi-laptop"></i>
-                    <span class="app-menu__label">Technologies</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'projects') active @endif" href="{{ route('projects.index') }}">
-                <i class="app-menu__icon bi bi-terminal"></i>
-                    <span class="app-menu__label">Projects</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'teams') active @endif" href="{{ route('teams.index') }}">
-                <i class="app-menu__icon bi bi-people"></i>
-                    <span class="app-menu__label">Teams</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'articles') active @endif" href="{{ route('articles.index') }}">
-                <i class="app-menu__icon bi bi-people"></i>
-                    <span class="app-menu__label">Articles</span>
-            </a>
-        </li> --}}
+
         {{--
         @if (auth()->user()->hasPermission('settings_read') || auth()->user()->hasRole('super_admin'))
             <li class="treeview @if (Request::segment(2) == 'settings') is-expanded @endif">
