@@ -18,11 +18,21 @@
         </li>
         {{-- pages sectin  --}}
          <li>
+
+            <a class="app-menu__item @if (Request::segment(2) == 'categories') active @endif" href="{{ route('categories.index') }}">
+                <i class="app-menu__icon bi bi-tags"></i>
+                    <span class="app-menu__label">categories</span>
+            </a>
+        </li>
+
+
+
             <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('stores.index') }}">
                 <i class="app-menu__icon bi bi-shop"></i>
                     <span class="app-menu__label">Stores</span>
             </a>
         </li>
+
 
         {{--
         @if (auth()->user()->hasPermission('settings_read') || auth()->user()->hasRole('super_admin'))
