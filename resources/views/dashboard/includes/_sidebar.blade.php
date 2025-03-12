@@ -27,11 +27,16 @@
         </li>
 
 
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif"
-                href="{{ route('stores.index') }}">
+
+            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('stores.index') }}">
                 <i class="app-menu__icon bi bi-shop"></i>
                 <span class="app-menu__label">Stores</span>
+            </a>
+        </li>
+<li>
+            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('roles.index') }}">
+                <i class="app-menu__icon bi bi-shop"></i>
+                    <span class="app-menu__label">Roles</span>
             </a>
         </li>
 

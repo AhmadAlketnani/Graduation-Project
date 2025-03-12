@@ -13,7 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-
+        $roles = Role::whenSearch(request()->search)->paginate(8);
+        return view('dashboard.roles.index', compact('roles'));
     }
 
     /**
@@ -21,8 +22,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $Roles = Role::whenSearch(request()->search)->paginate(8);
-        return view('dashboard.Roles.index', compact('Roles'));
+        return view('dashboard.roles.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class RoleController extends Controller
 
         Role::create($request->all());
         session()->flash('success', 'Role created successfully');
-        return redirect(route('Roles.index'));
+        return redirect(route('roles.index'));
     }
 
     /**
@@ -50,9 +50,9 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        return view('dashboard.Roles.edit', compact('Role'));
+        return view('dashboard.roles.edit', compact('role'));
     }
 
     /**
@@ -64,9 +64,9 @@ class RoleController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        Role::find($id)->update($request->all());
+        Role::findOrFail($id)->update($request->all());
         session()->flash('success', 'Role updated successfully');
-        return redirect(route('Roles.index'));
+        return redirect(route('roles.index'));
     }
 
     /**
@@ -74,8 +74,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        Role::find($id)->delete();
-        session()->flash('success', 'Role deleted successfully');
-        return redirect(route('Roles.index'));
+        Role::findOrFail($id)->delete();
+        session()->flash('deleted', 'Role deleted successfully');
+        return redirect(route('roles.index'));
     }
 }
