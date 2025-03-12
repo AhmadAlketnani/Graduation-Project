@@ -27,7 +27,7 @@
         </li>
 
         <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif"
+            <a class="app-menu__item @if (Request::segment(2) == 'stores') active @endif"
                 href="{{ route('stores.index') }}">
 
                 <i class="app-menu__icon bi bi-shop"></i>
@@ -35,15 +35,15 @@
             </a>
         </li>
         <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('roles.index') }}">
+            <a class="app-menu__item @if (Request::segment(2) == 'roles') active @endif" href="{{ route('roles.index') }}">
                 <i class="app-menu__icon bi bi-shop"></i>
                 <span class="app-menu__label">Roles</span>
             </a>
         </li>
         <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'stors') active @endif" href="{{ route('roles.index') }}">
+            <a class="app-menu__item @if (Request::segment(2) == 'products') active @endif" href="{{ route('Products .index') }}">
                 <i class="app-menu__icon bi bi-shop"></i>
-                <span class="app-menu__label">Roles</span>
+                <span class="app-menu__label">Products</span>
             </a>
         </li>
 
