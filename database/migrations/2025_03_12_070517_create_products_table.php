@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->number_format('price');
+            $table->float('price');
             $table->string('image');
-            $table->number_format('QTY');
+            $table->tinyInteger('QTY');
             $table->text('description');
-            $table->enum('status', ['active', 'inactive']);
-            $table->foreign('stor_id')->references('id')->on('stores');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores');
             $table->timestamps();
         });
     }
