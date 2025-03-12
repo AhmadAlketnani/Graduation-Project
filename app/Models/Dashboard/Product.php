@@ -6,8 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'price', 'image', 'QTY', 'description', 'status', 'stor_id'];
+    protected $fillable = ['name', 'price', 'images', 'QTY', 'description', 'status', 'store_id'];
 
+    protected $casts = [
+        'images' => 'array'
+    ];
+
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
+
+
+// relationships-----------------------------------
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+    // scopes-----------------------------------
     public function scopeWhenSearch($query, $search)
     {
         return $query->when($search, function ($q) use ($search) {

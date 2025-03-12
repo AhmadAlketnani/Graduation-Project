@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dashboard\Category;
 use App\Models\Dashboard\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -35,14 +36,28 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'image' => 'required|image',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
             'QTY' => 'required|integer',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
-            'stor_id' => 'required|exists:stores,id'
+            'status' => "required|in:".Product::STATUS_ACTIVE,Product::STATUS_INACTIVE,
+            'store_id' => 'required|exists:stores,id'
         ]);
 
-        Product::create($request->all());
+        $request_date = $request->except('images');
+
+        $images = [];
+        foreach ($request->images as $index => $image) {
+            $imageName = $index . '_' . $request->name . time() . '.' . $image->extension();
+            $path = "images/products/$request->name/" . $imageName;
+
+            Storage::disk('public')->put($path, file_get_contents($image));
+            array_push($images, $path);
+        }
+
+        $request_date['images'] = $images;
+
+        Product::create($request_date);
         session()->flash('success', 'Product created successfully');
         return redirect(route('Product.index'));
     }
@@ -71,14 +86,30 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'image' => 'required|string',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
             'QTY' => 'required|integer',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
-            'stor_id' => 'required|exists:stores,id'
+            'status' => "required|in:".Product::STATUS_ACTIVE,Product::STATUS_INACTIVE,
+            'store_id' => 'required|exists:stores,id'
         ]);
 
-        $product->update($request->all());
+        $request_date = $request->except('images');
+
+        if ($request->has('images')) {
+            $images = [];
+            foreach ($request->images as $index => $image) {
+                $imageName = $index . '_' . $request->name . time() . '.' . $image->extension();
+                $path = "images/products/$request->name/" . $imageName;
+
+                Storage::disk('public')->put($path, file_get_contents($image));
+                array_push($images, $path);
+            }
+
+            $request_date['images'] = $images;
+        }
+
+        $product->update($request_date);
         session()->flash('success', 'Product updated successfully');
         return redirect(route('Product.index'));
     }
@@ -88,8 +119,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        foreach ($product->images as $image) {
+            Storage::disk('public')->delete($image);
+        }
         $product->delete();
-        session()->flash('success', 'Product deleted successfully');
+        session()->flash('deleted', 'Product deleted successfully');
         return redirect(route('Product.index'));
     }
 }
