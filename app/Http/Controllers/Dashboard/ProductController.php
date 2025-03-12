@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard\Category;
 use App\Models\Dashboard\Product;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = Product::whenSearch(request()->search)->paginate(8);
-        return view('dashboard.categories.index', compact('categories'));
+        $categories = Category::all();
+        $products = Product::whenSearch(request()->search)->paginate(8);
+        return view('dashboard.products.index', compact('products', 'categories'));
     }
 
     /**
@@ -22,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.Products.create');
+        return view('dashboard.products.create');
     }
 
     /**
@@ -33,7 +35,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'image' => 'required|string',
+            'image' => 'required|image',
             'QTY' => 'required|integer',
             'description' => 'nullable|string',
             'status' => 'required|in:active,inactive',
