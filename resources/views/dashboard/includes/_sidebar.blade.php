@@ -41,17 +41,18 @@
             </a>
         </li>
         <li>
+            <a class="app-menu__item @if (Request::segment(2) == 'permission') active @endif" href="{{ route('permissions.index') }}">
+                <i class="app-menu__icon bi bi-shield-check"></i>
+                <span class="app-menu__label">Permissions</span>
+            </a>
+        </li>
+        <li>
             <a class="app-menu__item @if (Request::segment(2) == 'products') active @endif" href="{{ route('Products.index') }}">
                 <i class="app-menu__icon bi bi-shop"></i>
                 <span class="app-menu__label">Products</span>
             </a>
         </li>
-        <li>
-            <a class="app-menu__item @if (Request::segment(2) == 'permission') active @endif" href="{{ route('permissions.index') }}">
-                <i class="app-menu__icon bi bi-shop"></i>
-                <span class="app-menu__label">Permissions</span>
-            </a>
-        </li>
+
 
 
 
