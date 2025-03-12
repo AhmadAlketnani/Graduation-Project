@@ -11,9 +11,9 @@ use App\Http\Controllers\Dashboard\PermissionController;
 Route::resource('stores', StoreController::class);
 
 Route::resource('categories', CategoryController::class);
-Route::resource('Products ', ProductController::class);
+Route::resource('Products', ProductController::class);
 Route::resource('roles', RoleController::class);
-Route::resource('permissions ', PermissionController::class);
+Route::resource('permissions', PermissionController::class);
 
 
 
