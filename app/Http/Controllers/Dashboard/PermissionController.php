@@ -13,7 +13,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(8);
         return view('dashboard.permissions.index', compact('permissions'));
     }
 
@@ -30,7 +30,13 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        Permission::create($request->all());
+        session()->flash('success', 'Permission created successfully');
+        return redirect(route('permissions.index'));
     }
 
     /**
@@ -46,7 +52,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        return view('dashboard.permissions.edit', compact('permission'));
     }
 
     /**
@@ -54,7 +60,12 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $permission->update($request->all());
+        session()->flash('success', 'Permission updated successfully');
+        return redirect(route('permissions.index'));
     }
 
     /**
@@ -62,6 +73,8 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        session()->flash('deleted', 'Permission deleted successfully');
+        return redirect(route('permissions.index'));
     }
 }
