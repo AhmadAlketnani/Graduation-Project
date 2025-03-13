@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\PlaneController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
@@ -14,6 +15,7 @@ Route::resource('categories', CategoryController::class);
 Route::resource('Products', ProductController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
+Route::resource('planes',PlaneController::class);
 
 
 
