@@ -19,8 +19,9 @@
 
                 <main class="content-wrapper">
                     @include('dashboard.includes._sessions')
-                    @yield('content')
-
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        @yield('content')
+                    </div>
                     <footer class="content-footer footer bg-footer-theme">
                         <div class="container-xxl">
                             <div
