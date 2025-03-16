@@ -1,15 +1,7 @@
 @extends('dashboard.layout.app')
 
 @section('content')
-    {{-- <nav aria-label="breadcrumb" class="p-3 mb-3 rounded-1 d-flex justify-content-between "
-        style="background: #d3d3d3 !important;">
-        <h2 style="margin: 0 !important;">Permissions</h2>
-        <ol class="breadcrumb d-flex align-items-center" style="margin: 0 !important;">
-            <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Permissions</li>
 
-        </ol>
-    </nav> --}}
     <div class="row">
         <div class="col-12">
             <!-- Role Table -->
@@ -171,4 +163,5 @@
             <!--/ Role Table -->
         </div>
     </div>
+    
 @endsection
