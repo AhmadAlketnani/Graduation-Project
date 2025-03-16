@@ -100,7 +100,7 @@
                                             </td>
                                             <td><span class="fw-medium">{{ $plane->product_numbers }}</span></td>
                                             <td>{{ $plane->period }} Month</td>
-                                            <td><span class="badge bg-label-success" text-capitalized="">Active</span>
+                                            <td><span class="badge bg-label-{{ $plane->status == App\Models\Dashboard\Plane::STATUS_ACTIVE ? 'success' : 'danger' }}" text-capitalized="">{{ $plane->status }}</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center gap-2">
