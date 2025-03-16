@@ -48,15 +48,7 @@
                             <div class="d-md-flex justify-content-between align-items-center col-12 dt-layout-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
-                                    <colgroup>
-                                        <col data-dt-column="1" style="width: 67.1375px;">
-                                        <col data-dt-column="2" style="width: 334.1px;">
-                                        <col data-dt-column="3" style="width: 165.062px;">
-                                        <col data-dt-column="4" style="width: 130.538px;">
-                                        <col data-dt-column="5" style="width: 209.038px;">
-                                        <col data-dt-column="6" style="width: 124.613px;">
-                                        <col data-dt-column="7" style="width: 178.312px;">
-                                    </colgroup>
+                                    
                                     <thead>
                                         <tr>
                                             <th data-dt-column="0" class="control dt-orderable-none dtr-hidden"
