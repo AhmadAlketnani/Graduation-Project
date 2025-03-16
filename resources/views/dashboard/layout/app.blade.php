@@ -62,6 +62,7 @@
     </div>
     <!-- Essential javascripts for application to work-->
     @include('dashboard.includes._scripts')
+    @stack('scripts')
 
 </body>
 

@@ -26,8 +26,9 @@
 
                                             <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
                                                 Search</button>
-                                            <a href="#" class="btn btn-outline-success" data-bs-target="#addRoleModal"
-                                                data-bs-toggle="modal"><i class="bx bx-plus"></i> Add</i>
+                                            <a href="#" class="btn btn-outline-success"
+                                                data-bs-target="#addPlaneModal" data-bs-toggle="modal"><i
+                                                    class="bx bx-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -90,8 +91,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="{{ route('planes.edit', $plane->id) }}"
-                                                            class="btn-sm btn-icon text-warning "><i
+                                                        <a href="#" data-bs-target="#editPlaneModal"
+                                                            onclick="showEditModalPlane('{{ $plane }}', '{{ route('planes.update', $plane->id) }}')"
+                                                            data-bs-toggle="modal" class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base bx bx-edit-alt icon-md"></i></a>
 
                                                         <form method="post"
@@ -113,7 +115,17 @@
                             </div>
                         </div>
                         <div class="row mx-3 justify-content-between">
-                            
+                            @if ($planes->count() > 0)
+                                {{ $planes->appends(request()->query())->links() }}
+                            @else
+                                <h3 class="mt-3 text-center ">
+                                    @if (request()->search)
+                                        Sorry no plane like this
+                                    @else
+                                        Sorry no data found
+                                    @endif
+                                </h3>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -121,5 +133,179 @@
             <!--/ Role Table -->
         </div>
     </div>
-    
+    {{-- add modal --}}
+    <div class="modal fade" id="addPlaneModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Add new Plane</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Add role form -->
+                    <form id="addRoleForm" class="row mt-3 g-6" onsubmit="return false">
+                        {{-- Full input  --}}
+                        <div class="row ">
+                            <div class="col mb-3">
+                                <label for="nameLarge" class="form-label">Name</label>
+                                <input type="text" id="nameLarge" class="form-control" placeholder="Enter Name"
+                                    name="name">
+                            </div>
+                        </div>{{-- end of Full input --}}
+                        {{-- half input --}}
+                        <div class="row mt-1 g-9 " style="padding-right: 0 !important;">
+                            <div class="col mb-0 mt-0">
+                                <label for="priceLarge" class="form-label">price</label>
+                                <input type="number" id="priceLarge" class="form-control" placeholder="50"
+                                    name="price">
+                            </div>
+                            <div class="col mb-0 mt-0 ">
+                                <label for="PD" class="form-label">Product Numbers</label>
+                                <input type="number" id="PD" class="form-control" name="product_numbers">
+                            </div>
+                        </div>
+                        <div class="row mt-1 g-9 " style="padding-right: 0 !important;">
+                            <div class="col mb-0 mt-0">
+                                <label for="PeriodLarge" class="form-label">Period</label>
+                                <input type="number" id="emailLarge" class="form-control" placeholder="6"
+                                    name="Period">
+                            </div>
+                            <div class="col mb-0 mt-0 d-flex align-items-end ">
+                                <div class="form-check form-check-success">
+                                    <input class="form-check-input" type="checkbox" id="customCheckSuccess"
+                                        checked="" name="status"
+                                        value="{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}">
+                                    <label class="form-check-label" for="customCheckSuccess">Active</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-success me-sm-3 me-1">Save</button>
+                            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal"
+                                aria-label="Close">Cancel</button>
+                        </div>
+                    </form>
+                    <!--/ Add role form -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- edit modal --}}
+    <div class="modal fade" id="editPlaneModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Add new Plane</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Add role form -->
+                    <form id="editPlaneForm" class="row mt-3 g-6" data-url="" onsubmit="return false">
+                        {{-- Full input  --}}
+                        <div class="row ">
+                            <div class="col mb-3">
+                                <label for="nameLarge" class="form-label">Name</label>
+                                <input type="text" id="nameLarge" class="form-control" placeholder="Enter Name"
+                                    name="name">
+                            </div>
+                        </div>{{-- end of Full input --}}
+                        {{-- half input --}}
+                        <div class="row mt-1 g-9 " style="padding-right: 0 !important;">
+                            <div class="col mb-0 mt-0">
+                                <label for="priceLarge" class="form-label">price</label>
+                                <input type="number" id="priceLarge" class="form-control" placeholder="50"
+                                    name="price">
+                            </div>
+                            <div class="col mb-0 mt-0 ">
+                                <label for="PD" class="form-label">Product Numbers</label>
+                                <input type="number" id="PD" class="form-control" name="product_numbers">
+                            </div>
+                        </div>
+                        <div class="row mt-1 g-9 " style="padding-right: 0 !important;">
+                            <div class="col mb-0 mt-0">
+                                <label for="PeriodLarge" class="form-label">Period</label>
+                                <input type="number" id="emailLarge" class="form-control" placeholder="6"
+                                    name="Period">
+                            </div>
+                            <div class="col mb-0 mt-0 d-flex align-items-end ">
+                                <div class="form-check form-check-success">
+                                    <input class="form-check-input" type="checkbox" id="customCheckSuccess"
+                                        checked="" name="status"
+                                        value="{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}">
+                                    <label class="form-check-label" for="customCheckSuccess">Active</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-warning me-sm-3 me-1">Edit</button>
+                            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal"
+                                aria-label="Close">Cancel</button>
+                        </div>
+                    </form>
+                    <!--/ Add role form -->
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script>
+            function showEditModalPlane(plane, url) {
+                plane = JSON.parse(plane);
+                document.querySelector('#editPlaneForm input[name="name"]').value = plane.name;
+                document.querySelector('#editPlaneForm input[name="price"]').value = plane.price;
+                document.querySelector('#editPlaneForm input[name="product_numbers"]').value = plane.product_numbers;
+                document.querySelector('#editPlaneForm input[name="Period"]').value = plane.period;
+                document.querySelector('#editPlaneForm input[name="status"]').checked = plane.status ===
+                    '{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}';
+                document.querySelector('#editPlaneForm').setAttribute('data-url', url);
+            }
+
+
+            $(document).ready(function() {
+                $('#editPlaneForm').on('submit', function(e) {
+                    e.preventDefault(); // Prevent the default form submission
+
+                    let formData = new FormData(); // Create FormData object to handle form data
+                    let form = document.querySelector('#editPlaneForm');
+
+                    // Set form field values
+                    formData.append('name',form.querySelector('input[name="name"]').value );
+                    formData.append('price',form.querySelector('input[name="price"]').value );
+                    formData.append('product_numbers',form.querySelector('input[name="product_numbers"]').value );
+                    formData.append('Period',form.querySelector('input[name="Period"]').value );
+                    formData.append('status',form.querySelector('input[name="status"]').value );
+
+
+                    let url = $(this).data('url'); // Define the route
+
+                    $.ajax({
+                        url: url,
+                        method: "PUT",
+                        data: formData,
+                        processData: false, // Prevent jQuery from converting the data
+                        contentType: false, // Prevent jQuery from setting the content type
+                        success: function(response) {
+                            if (response.success) {
+                                $('#editPlaneModal').modal('hide'); // Hide the modal
+                                alert(response.message); // Show success message (or use toastr)
+                                location.reload(); // Reload the page (or update the UI dynamically)
+                            }
+                        },
+                        error: function(xhr) {
+                            let errors = xhr.responseJSON.errors;
+                            let errorMessage = "An error occurred:\n";
+                            $.each(errors, function(key, value) {
+                                errorMessage += value[0] + "\n";
+                            });
+                            alert(errorMessage); // Show error messages
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
 @endsection
