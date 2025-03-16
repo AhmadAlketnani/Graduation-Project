@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <nav aria-label="breadcrumb" class="p-3 mb-3 rounded-1 d-flex justify-content-between "
+    {{-- <nav aria-label="breadcrumb" class="p-3 mb-3 rounded-1 d-flex justify-content-between "
         style="background: #d3d3d3 !important;">
         <h2 style="margin: 0 !important;">Categories</h2>
         <ol class="breadcrumb d-flex align-items-center" style="margin: 0 !important;">
@@ -10,82 +10,144 @@
             <li class="breadcrumb-item active">Categories</li>
 
         </ol>
-    </nav>
+    </nav> --}}
 
-    <div class="tile mb-4">
-        <div class="row">
-
-            <div class="col-12">
-
-                <form action="">
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="text" name="search" value="{{ request()->search }}"
-                                    placeholder="search" autofocus class="form-control">
+    <div class="row">
+        <div class="col-12">
+            <!-- Role Table -->
+            <div class="card">
+                <div class="card-datatable">
+                    <div id="DataTables_Table_0_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                        <div class="row me-3 ms-2 justify-content-between">
+                            <div
+                                class="d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto ps-2 mt-0">
+                                <div class="dt-length mb-md-6 mb-0"><select name="DataTables_Table_0_length"
+                                        aria-controls="DataTables_Table_0" class="form-select" id="dt-length-0">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select><label for="dt-length-0"></label></div>
                             </div>
-                        </div>{{-- end of col --}}
+                            <div
+                                class="d-md-flex align-items-center dt-layout-end col-md-auto ms-auto justify-content-md-between justify-content-center d-flex flex-wrap gap-4 mb-sm-0 mb-4 mt-0">
+                                <div class="dt-search mb-md-6 mb-2"><input type="search" class="form-control"
+                                        id="dt-search-0" placeholder="Search User" aria-controls="DataTables_Table_0"><label
+                                        for="dt-search-0"></label></div>
+                                <div class="user_role w-px-200 my-md-0 mt-6 mb-2"><select id="UserRole"
+                                        class="form-select text-capitalize">
+                                        <option value=""> Select Role </option>
+                                        <option value="Admin" class="text-capitalize">Admin</option>
+                                        <option value="Author" class="text-capitalize">Author</option>
+                                        <option value="Editor" class="text-capitalize">Editor</option>
+                                        <option value="Maintainer" class="text-capitalize">Maintainer</option>
+                                        <option value="Subscriber" class="text-capitalize">Subscriber</option>
+                                    </select></div>
 
-                        <div class="col-md-4 ">
+                            </div>
+                        </div>
+                        <div class="justify-content-between dt-layout-table">
+                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layout-full col-md">
+                                <table class="datatables-users table border-top table-responsive dataTable dtr-column"
+                                    id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
+                                  
+                                    <thead>
+                                        <tr>
 
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                            <a href="{{ route('categories.create') }}" class="btn btn-outline-success"><i
-                                    class="bi bi-plus-square"></i> Add</i>
-                            </a>
-                        </div>{{-- end of col --}}
+                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                class="dt-select dt-orderable-none" aria-label="">#
+                                            </th>
+                                            <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Name</span>
+                                            </th>
 
-                    </div>{{-- end of row --}}
-                </form>{{-- end of form --}}
+                                            <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
+                                                aria-label="Actions"><span class="dt-column-title">Actions</span></th>
 
-            </div>{{-- end of col 12 --}}
-        </div>{{-- end of Head row --}}
+                                             </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($categories as $index => $category)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td class="text-heading">
+                                                <span class="fw-medium">{{ $category->name }}</span>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn-sm btn-icon text-warning "><i
+                                                            class="icon-base bx bx-edit-alt icon-md"></i></a>
 
-        <div class="row">
-            <div class="col-md-12">
-                @if ($categories->count() > 0)
-                    <table class="table  table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($categories as $index => $category)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        {{ $category->name }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('categories.edit', $category) }} " class=" btn btn-warning btn-sm"><i
-                                                class="bi bi-pencil-square"></i> Edit</a>
+                                                            <form method="post" action="{{ route('categories.destroy', $category->id) }}"
+                                                                style="display: inline-block;">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="btn-sm  btn-icon text-danger "><i
+                                                            class="icon-base bx bx-trash icon-md"></i> </button>
+                                                            </form>
 
-                                        <form method="post" action="{{ route('categories.destroy', $category->id) }}"
-                                            style="display: inline-block;">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm delete"><i
-                                                    class="bi bi-trash"></i> Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $categories->appends(request()->query())->links() }}
-                @else
-                    <h3 style="text-align: center" class="mt-3 ">
-                        @if (request()->search)
-                            Sorry no category like this
-                        @else
-                            Sorry no data found
-                        @endif
-                    </h3>
-                @endif
+
+{{--
+                                                    <a href="javascript:;" class="btn-sm  btn-icon text-danger "><i
+                                                            class="icon-base bx bx-trash icon-md"></i></a> --}}
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mx-3 justify-content-between">
+                            <div
+                                class="d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto ps-2 mt-0">
+                                <div class="dt-info" aria-live="polite" id="DataTables_Table_0_info" role="status">
+                                    Showing 1 to 10 of 50 entries<span class="select-info"><span class="select-item">50
+                                            rows selected</span><span class="select-item"></span><span
+                                            class="select-item"></span></span></div>
+                            </div>
+                            <div
+                                class="d-md-flex align-items-center dt-layout-end col-md-auto ms-auto justify-content-md-between justify-content-center d-flex flex-wrap gap-4 mb-sm-0 mb-4 mt-0">
+                                <div class="dt-paging">
+                                    <nav aria-label="pagination">
+                                        <ul class="pagination">
+                                            <li class="dt-paging-button page-item disabled"><button
+                                                    class="page-link previous" role="link" type="button"
+                                                    aria-controls="DataTables_Table_0" aria-disabled="true"
+                                                    aria-label="Previous" data-dt-idx="previous" tabindex="-1"><i
+                                                        class="icon-base bx bx-chevron-left scaleX-n1-rtl icon-18px"></i></button>
+                                            </li>
+                                            <li class="dt-paging-button page-item active"><button class="page-link"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    aria-current="page" data-dt-idx="0">1</button></li>
+                                            <li class="dt-paging-button page-item"><button class="page-link"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    data-dt-idx="1">2</button></li>
+                                            <li class="dt-paging-button page-item"><button class="page-link"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    data-dt-idx="2">3</button></li>
+                                            <li class="dt-paging-button page-item"><button class="page-link"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    data-dt-idx="3">4</button></li>
+                                            <li class="dt-paging-button page-item"><button class="page-link"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    data-dt-idx="4">5</button></li>
+                                            <li class="dt-paging-button page-item"><button class="page-link next"
+                                                    role="link" type="button" aria-controls="DataTables_Table_0"
+                                                    aria-label="Next" data-dt-idx="next"><i
+                                                        class="icon-base bx bx-chevron-right scaleX-n1-rtl icon-18px"></i></button>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!--/ Role Table -->
         </div>
     </div>
 
