@@ -4,8 +4,17 @@
 
 <script src="{{ asset('dashboard-asset/vendor/libs/popper/popper.js') }}"></script>
 <script src="{{ asset('dashboard-asset/vendor/js/bootstrap.js') }}"></script>
+<script src="{{ asset('dashboard-asset/vendor/libs/@algolia/autocomplete-js.js') }}"></script>
 
+
+
+      <script src="{{ asset('dashboard-asset/vendor/libs/pickr/pickr.js') }}"></script>
 <script src="{{ asset('dashboard-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+
+
+<script src="{{ asset('dashboard-asset/vendor/libs/hammer/hammer.js') }}"></script>
+
+<script src="{{ asset('dashboard-asset/vendor/libs/i18n/i18n.js') }}"></script>
 
 <script src="{{ asset('dashboard-asset/vendor/js/menu.js') }}"></script>
 
