@@ -13,7 +13,7 @@ class PlaneController extends Controller
      */
     public function index()
     {
-        $planes = Plane::whenSearch(request()->search)->paginate(8);
+        $planes = Plane::whenSearch(request()->search)->paginate(2);
         return view('dashboard.planes.index', compact('planes'));
 
     }
@@ -64,6 +64,7 @@ class PlaneController extends Controller
      */
     public function update(Request $request, Plane $plane)
     {
+        dd($request);
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
@@ -73,7 +74,7 @@ class PlaneController extends Controller
         ]);
         $plane->update($request->all());
         session()->flash('success', 'Plane updated successfully');
-        return redirect(route('planes.index'));
+        return response()->json(['success' => true, 'message' => 'Plane updated successfully!']);
     }
 
     /**
