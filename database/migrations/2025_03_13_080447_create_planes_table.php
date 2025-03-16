@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('price');
             $table->tinyInteger('product_numbers');
             $table->string('period');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->timestamps();
         });
     }

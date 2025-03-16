@@ -36,6 +36,7 @@ class PlaneController extends Controller
             'price' => 'required|numeric',
             'product_numbers' => 'required|numeric',
             'period' => 'required|string|max:255',
+            'status' => 'sometimes|required',
         ]);
         Plane::create($request->all());
         session()->flash('success', 'Plane created successfully');
@@ -68,6 +69,7 @@ class PlaneController extends Controller
             'price' => 'required|numeric',
             'product_numbers' => 'required|numeric',
             'period' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
         $plane->update($request->all());
         session()->flash('success', 'Plane updated successfully');
