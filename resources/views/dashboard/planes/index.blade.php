@@ -73,26 +73,30 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($planes as $index => $plane)
-                                            <tr>
+                                            <tr id="{{ $plane->id }}">
                                                 <td>{{ $index + 1 }}</td>
-                                                <td class="text-heading">
+                                                <td class="text-heading" id="{{ $plane->id }}-name">
                                                     <span class="fw-medium">{{ $plane->name }}</span>
                                                 </td>
 
                                                 <td>
                                                     <span class="text-truncate d-flex align-items-center text-heading"><i
-                                                            class="icon-base bx bx-dollar text-success me-2"></i>{{ $plane->price }}</span>
+                                                            class="icon-base bx bx-dollar text-success me-2"></i><span
+                                                            id="{{ $plane->id }}-price">{{ $plane->price }}</span></span>
                                                 </td>
-                                                <td><span class="fw-medium">{{ $plane->product_numbers }}</span></td>
-                                                <td>{{ $plane->period }} Month</td>
-                                                <td><span
+                                                <td><span class="fw-medium"
+                                                        id="{{ $plane->id }}-product_numbers">{{ $plane->product_numbers }}</span>
+                                                </td>
+                                                <td><span id="{{ $plane->id }}-period">{{ $plane->period }}</span> Month
+                                                </td>
+                                                <td id="{{ $plane->id }}-status"><span
                                                         class="badge bg-label-{{ $plane->status == App\Models\Dashboard\Plane::STATUS_ACTIVE ? 'success' : 'danger' }}"
                                                         text-capitalized="">{{ $plane->status }}</span>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editPlaneModal"
-                                                            onclick="showEditModalPlane('{{ $plane }}', '{{ route('planes.update', $plane->id) }}')"
+                                                            onclick="showEditModalPlane('{{ route('planes.show', $plane->id) }}', '{{ route('planes.update', $plane->id) }}')"
                                                             data-bs-toggle="modal" class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base bx bx-edit-alt icon-md"></i></a>
 
@@ -114,7 +118,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mx-3 justify-content-between">
+                        <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
                             @if ($planes->count() > 0)
                                 {{ $planes->appends(request()->query())->links() }}
                             @else
@@ -228,7 +232,7 @@
                             <div class="col mb-0 mt-0">
                                 <label for="PeriodLarge" class="form-label">Period</label>
                                 <input type="number" id="emailLarge" class="form-control" placeholder="6"
-                                    name="Period">
+                                    name="period">
                             </div>
                             <div class="col mb-0 mt-0 d-flex align-items-end ">
                                 <div class="form-check form-check-success">
@@ -253,53 +257,76 @@
     </div>
     @push('scripts')
         <script>
-            function showEditModalPlane(plane, url) {
-                plane = JSON.parse(plane);
-                document.querySelector('#editPlaneForm input[name="name"]').value = plane.name;
-                document.querySelector('#editPlaneForm input[name="price"]').value = plane.price;
-                document.querySelector('#editPlaneForm input[name="product_numbers"]').value = plane.product_numbers;
-                document.querySelector('#editPlaneForm input[name="Period"]').value = plane.period;
-                document.querySelector('#editPlaneForm input[name="status"]').checked = plane.status ===
-                    '{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}';
-                document.querySelector('#editPlaneForm').setAttribute('data-url', url);
-            }
+            function showEditModalPlane(plane, update_url) {
 
+
+                $.ajax({
+                    url: plane, // Use the URL of the update route
+                    method: 'GET', // Use GET to fetch the current data
+                    success: function(response) {
+                        // Assuming the response contains the updated plane data
+                        const plane = response.data;
+
+                        document.querySelector('#editPlaneForm input[name="name"]').value = plane.name;
+                        document.querySelector('#editPlaneForm input[name="price"]').value = plane.price;
+                        document.querySelector('#editPlaneForm input[name="product_numbers"]').value = plane
+                            .product_numbers;
+                        document.querySelector('#editPlaneForm input[name="period"]').value = plane.period;
+                        document.querySelector('#editPlaneForm input[name="status"]').checked = plane.status ===
+                            '{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}';
+                        document.querySelector('#editPlaneForm').setAttribute('data-url', update_url);
+                    }
+                });
+
+
+
+
+
+            }
 
             $(document).ready(function() {
                 $('#editPlaneForm').on('submit', function(e) {
                     e.preventDefault(); // Prevent the default form submission
 
-                    let formData = new FormData(); // Create FormData object to handle form data
-                    let form = document.querySelector('#editPlaneForm');
-
-                    // Set form field values
-                    formData.append('name',form.querySelector('input[name="name"]').value );
-                    formData.append('price',form.querySelector('input[name="price"]').value );
-                    formData.append('product_numbers',form.querySelector('input[name="product_numbers"]').value );
-                    formData.append('Period',form.querySelector('input[name="Period"]').value );
-                    formData.append('status',form.querySelector('input[name="status"]').value );
-
-
-                    let url = $(this).data('url'); // Define the route
+                    const formData = new FormData(this); // Create FormData object from the form
+                    const url = $(this).data('url'); // Define the route
 
                     $.ajax({
                         url: url,
-                        method: "PUT",
                         data: formData,
+                        method: "POST",
                         processData: false, // Prevent jQuery from converting the data
                         contentType: false, // Prevent jQuery from setting the content type
+                        headers: {
+                            "X-HTTP-Method-Override": "PUT"
+                        },
                         success: function(response) {
                             if (response.success) {
-                                $('#editPlaneModal').modal('hide'); // Hide the modal
-                                alert(response.message); // Show success message (or use toastr)
-                                location.reload(); // Reload the page (or update the UI dynamically)
+                                $('#editPlaneModal').modal('hide'); // Close the modal
+                                Swal.fire({
+                                    icon: "success",
+                                    title: response.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                const row = $("#" + response.data.id);
+                                row.find(`#${response.data.id}-name`).text(response.data.name);
+                                row.find(`#${response.data.id}-price`).text(response.data.price);
+                                row.find(`#${response.data.id}-product_numbers`).text(response.data
+                                    .product_numbers);
+                                row.find(`#${response.data.id}-period`).text(response.data.period);
+                                row.find(`#${response.data.id}-status`).html(
+                                    `<span class="badge bg-label-${response.data.status == 'active' ? 'success' : 'danger'}" text-capitalized="">${response.data.status}</span>`
+                                );
+
                             }
                         },
                         error: function(xhr) {
                             let errors = xhr.responseJSON.errors;
                             let errorMessage = "An error occurred:\n";
                             $.each(errors, function(key, value) {
-                                errorMessage += value[0] + "\n";
+                                errorMessage += value[0] +
+                                    "\n"; // Append each error message
                             });
                             alert(errorMessage); // Show error messages
                         }
