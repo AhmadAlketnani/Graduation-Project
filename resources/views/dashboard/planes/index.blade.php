@@ -66,12 +66,15 @@
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Status</span>
                                             </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Created_at</span>
+                                            </th>
 
                                             <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
                                                 aria-label="Actions"><span class="dt-column-title">Actions</span></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="table_body">
                                         @foreach ($planes as $index => $plane)
                                             <tr id="{{ $plane->id }}">
                                                 <td>{{ $index + 1 }}</td>
@@ -93,6 +96,7 @@
                                                         class="badge bg-label-{{ $plane->status == App\Models\Dashboard\Plane::STATUS_ACTIVE ? 'success' : 'danger' }}"
                                                         text-capitalized="">{{ $plane->status }}</span>
                                                 </td>
+                                                <td>{{ $plane->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editPlaneModal"
@@ -105,7 +109,8 @@
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="btn-sm  btn-icon text-danger "><i
+                                                            <button type="submit"
+                                                                class="btn-sm  btn-icon text-danger "><i
                                                                     class="icon-base bx bx-trash icon-md"></i> </button>
                                                         </form>
 
@@ -148,7 +153,7 @@
                 <div class="modal-body">
 
                     <!-- Add role form -->
-                    <form id="addRoleForm" class="row mt-3 g-6" onsubmit="return false">
+                    <form id="addPlaneForm" class="row mt-3 g-6" onsubmit="return false">
                         {{-- Full input  --}}
                         <div class="row ">
                             <div class="col mb-3">
@@ -172,8 +177,8 @@
                         <div class="row mt-1 g-9 " style="padding-right: 0 !important;">
                             <div class="col mb-0 mt-0">
                                 <label for="PeriodLarge" class="form-label">Period</label>
-                                <input type="number" id="emailLarge" class="form-control" placeholder="6"
-                                    name="Period">
+                                <input type="number" id="emailLarge" class="form-control"
+                                    placeholder="number of Months" name="Period">
                             </div>
                             <div class="col mb-0 mt-0 d-flex align-items-end ">
                                 <div class="form-check form-check-success">
@@ -186,7 +191,7 @@
                         </div>
 
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-success me-sm-3 me-1">Save</button>
+                            <button type="submit" class="btn btn-success me-sm-3 me-1"><i class="bx bx-plus"></i> Save</button>
                             <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal"
                                 aria-label="Close">Cancel</button>
                         </div>
@@ -206,7 +211,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <!-- Add role form -->
+                    <!-- edit role form -->
                     <form id="editPlaneForm" class="row mt-3 g-6" data-url="" onsubmit="return false">
                         {{-- Full input  --}}
                         <div class="row ">
@@ -257,9 +262,8 @@
     </div>
     @push('scripts')
         <script>
+            // Show the edit modal with the current data
             function showEditModalPlane(plane, update_url) {
-
-
                 $.ajax({
                     url: plane, // Use the URL of the update route
                     method: 'GET', // Use GET to fetch the current data
@@ -277,11 +281,6 @@
                         document.querySelector('#editPlaneForm').setAttribute('data-url', update_url);
                     }
                 });
-
-
-
-
-
             }
 
             $(document).ready(function() {
@@ -333,6 +332,11 @@
                     });
                 });
             });
+
+            
+
+
+
         </script>
     @endpush
 @endsection
