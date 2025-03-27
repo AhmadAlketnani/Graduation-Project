@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard\Category;
+use App\Traits\ImagesStorage;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use ImagesStorage;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        
         $categories = Category::whenSearch(request()->search)->paginate(8);
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -32,9 +35,17 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
+        $request_data = $request->except('image');
 
-        Category::create($request->all());
+        $request_data['image'] = $this->storeImage(
+            $request->file('image'),
+            $request->name . "_image_",
+            'categories/' . $request->name
+        );
+
+        Category::create($request_data);
         session()->flash('success', 'Category created successfully');
         return redirect(route('categories.index'));
     }

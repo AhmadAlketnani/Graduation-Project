@@ -153,7 +153,9 @@
                 <div class="modal-body">
 
                     <!-- Add role form -->
-                    <form id="addPlaneForm" class="row mt-3 g-6" onsubmit="return false">
+                    <form id="addPlaneForm" class="row mt-3 g-6" onsubmit="return false"
+                        action="{{ route('planes.store') }}">
+                        @csrf
                         {{-- Full input  --}}
                         <div class="row ">
                             <div class="col mb-3">
@@ -191,7 +193,8 @@
                         </div>
 
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-success me-sm-3 me-1"><i class="bx bx-plus"></i> Save</button>
+                            <button type="submit" class="btn btn-success me-sm-3 me-1"><i class="bx bx-plus"></i>
+                                Save</button>
                             <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal"
                                 aria-label="Close">Cancel</button>
                         </div>
@@ -282,7 +285,7 @@
                     }
                 });
             }
-
+            //edit modal handeling
             $(document).ready(function() {
                 $('#editPlaneForm').on('submit', function(e) {
                     e.preventDefault(); // Prevent the default form submission
@@ -333,7 +336,67 @@
                 });
             });
 
-            
+
+            // $(document).ready(function(){
+            //     $('#addPlaneForm').on('submit', function(e) {
+            //         e.preventDefault(); // Prevent the default form submission
+
+            //         const formData = new FormData(this); // Create FormData object from the form
+            //         const url = $(this).attr('action'); // Define the route
+
+            //         $.ajax({
+            //             url: url,
+            //             data: formData,
+            //             method: "POST",
+            //             processData: false, // Prevent jQuery from converting the data
+            //             contentType: false, // Prevent jQuery from setting the content type
+            //             success: function(response) {
+            //                 if (response.success) {
+            //                     $('#addPlaneModal').modal('hide'); // Close the modal
+            //                     Swal.fire({
+            //                         icon: "success",
+            //                         title: response.message,
+            //                         showConfirmButton: false,
+            //                         timer: 1500
+            //                     });
+            //                     $('#table_body').append(`
+    //                         <tr id="${response.data.id}">
+    //                             <td>${response.data.id}</td>
+    //                             <td class="text-heading" id="${response.data.id}-name">
+    //                                 <span class="fw-medium">${response.data.name}</span>
+    //                             </td>
+    //                             <td>
+    //                                 <span class="text-truncate d-flex align-items-center text-heading"><i class="icon-base bx bx-dollar text-success me-2"></i><span id="${response.data.id}-price">${response.data.price}</span></span>
+    //                             </td>
+    //                             <td><span class="fw-medium" id="${response.data.id}-product_numbers">${response.data.product_numbers}</span></td>
+    //                             <td><span id="${response.data.id}-period">${response.data.period}</span> Month</td>
+    //                             <td id="${response.data.id}-status"><span class="badge bg-label-${response.data.status == 'active' ? 'success' : 'danger'}" text-capitalized="">${response.data.status}</span></td>
+    //                             <td>${response.data.created_at}</td>
+    //                             <td>
+    //                                 <div class="d-flex align-items-center gap-2">
+    //                                     <a href="#" data-bs-target="#editPlaneModal" onclick="showEditModalPlane('${response.data.id}', '${response.data.id}')" data-bs-toggle="modal" class="btn-sm btn-icon text-warning "><i class="icon-base bx bx-edit-alt icon-md"></i></a>
+    //                                     <form method="post" action="${response.data.id}" style="display: inline-block;">
+    //                                         @csrf
+    //                                         @method('delete
+            //                                         <button type="submit" class="btn-sm  btn-icon text-danger "><i class="icon-base bx bx-trash icon-md"></i> </button>
+            //                                     </form>
+            //                                 </div>
+            //                             </td>
+            //                         </tr>
+            //                     `);
+    //                 }
+    //             },
+    //             error: function(xhr) {
+    //                 let errors = xhr.responseJSON.errors;
+    //                 let errorMessage = "An error occurred:\n";
+    //                 $.each(errors, function(key, value) {
+    //                     errorMessage += value[0] + "\n"; // Append each error message
+    //                 });
+    //                 alert(errorMessage); // Show error messages
+    //             }
+    //         });
+    //     });
+    // });
 
 
 
