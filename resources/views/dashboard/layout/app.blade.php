@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="layout-menu-fixed layout-compact" data-assets-path="../assets/"
+<html lang="en" class="layout-menu-fixed layout-compact" data-assets-path="{{ asset('dashboard-asset') }}"
     data-template="vertical-menu-template-free">
 
 {{-- include a head --}}
