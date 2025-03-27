@@ -32,6 +32,8 @@
 
 <!-- Place this tag before closing body tag for github widget button. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+{{-- sweetalert2 --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 {{-- <script src="{{ asset('dashboard-asset/js/jquery-3.7.0.min.js') }}"></script>
