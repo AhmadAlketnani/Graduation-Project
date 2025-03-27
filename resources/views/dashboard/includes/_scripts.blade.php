@@ -8,7 +8,7 @@
 
 
 
-      <script src="{{ asset('dashboard-asset/vendor/libs/pickr/pickr.js') }}"></script>
+<script src="{{ asset('dashboard-asset/vendor/libs/pickr/pickr.js') }}"></script>
 <script src="{{ asset('dashboard-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
 
