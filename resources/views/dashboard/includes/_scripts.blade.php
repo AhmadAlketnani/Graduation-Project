@@ -62,4 +62,36 @@ select2
     $('.select2').select2({
         width: '100%'
     })
+
+    // make effict when hover on the image
+    function showZoomedImage(image)
+            {
+                const zoomedImage = document.createElement('img');
+                zoomedImage.src = image;
+                zoomedImage.style.position = 'absolute';
+                zoomedImage.style.width = '200px';
+                zoomedImage.style.height = '200px';
+                zoomedImage.style.border = '1px solid #ccc';
+                zoomedImage.style.background = '#fff';
+                zoomedImage.style.zIndex = '1000';
+                zoomedImage.id = 'zoomedImage';
+
+                document.body.appendChild(zoomedImage);
+
+                document.addEventListener('mousemove', function (event) {
+                    const zoomedImg = document.getElementById('zoomedImage');
+                    if (zoomedImg) {
+                        zoomedImg.style.top = event.pageY + 10 + 'px';
+                        zoomedImg.style.left = event.pageX + 10 + 'px';
+                    }
+                });
+            }
+
+            function hideZoomedImage()
+            {
+                const zoomedImg = document.getElementById('zoomedImage');
+                if (zoomedImg) {
+                    zoomedImg.remove();
+                }
+            }
 </script>
