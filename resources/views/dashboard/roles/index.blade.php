@@ -186,7 +186,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @foreach ($models as $model )
+                                        {{-- @foreach ($models as $model )
                                         <tr>
                                             <td class="text-nowrap fw-medium text-heading">User Management</td>
 
@@ -219,7 +219,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
