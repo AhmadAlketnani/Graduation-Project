@@ -20,7 +20,11 @@ class Store extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'store_id');
     }
 
     // scopes----------------------------------------------

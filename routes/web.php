@@ -8,6 +8,11 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\PermissionController;
 
+Route::prefix('/admin')/* ->middleware('auth') */ ->group(function () {
+
+    Route::get('/', function () {
+        return view('dashboard.layout.app');
+    })->name('admin');
 
 Route::resource('stores', StoreController::class);
 
@@ -19,6 +24,5 @@ Route::resource('planes',PlaneController::class);
 
 
 
-Route::get('admin', function () {
-    return view('dashboard.layout.app');
-})->name('admin');
+
+});

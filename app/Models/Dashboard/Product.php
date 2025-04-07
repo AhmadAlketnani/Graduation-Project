@@ -24,8 +24,13 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'product_categories');
+        return $this->belongsTo(Category::class,'category_id' );
     }
+    public function stores()
+    {
+        return $this->belongsTo(Store::class, 'store_id');
+    }
+
     // scopes-----------------------------------
     public function scopeWhenSearch($query, $search)
     {
