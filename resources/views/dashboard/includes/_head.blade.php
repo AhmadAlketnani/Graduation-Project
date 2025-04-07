@@ -19,6 +19,8 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('dashboard-asset/vendor/fonts/iconify-icons.css') }}" />
+    <link rel="stylesheet" href="{{asset('dashboard-asset/icons/tabler-icons.css') }}" />
+
 
     <!-- Core CSS -->
     <!-- build:css assets/vendor/css/theme.css  -->
