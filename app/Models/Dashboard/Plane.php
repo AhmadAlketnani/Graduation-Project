@@ -26,6 +26,12 @@ class Plane extends Model
 
     }// end of getNameAttributes
 
+    public function Store(){
+        return $this->hasMany(Store_planes::class);
+    }
+    public function Store_planes(){
+        return $this->belongsTo(Store_planes::class, 'planes_id');
+    }
     //  scopes----------------------------------
     public function scopeWhenSearch($query, $search)
     {
