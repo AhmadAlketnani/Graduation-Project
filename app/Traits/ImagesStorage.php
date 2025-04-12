@@ -28,8 +28,6 @@ trait ImagesStorage
         foreach ($images as $index => $image) {
             $imagesArray[] = $this->storeImage($image, $name . "_$index", $path);
         }
-        // dd($images);
-
         return $imagesArray;
     }
 

@@ -46,5 +46,6 @@
 
     <script src="{{ asset('dashboard-asset/js/config.js') }}"></script>
     <style id="custom-css"></style>
+    @stack('style')
 </head>
 
