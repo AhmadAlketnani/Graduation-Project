@@ -10,9 +10,9 @@ Route::group(
         Route::middleware('guest')->group(function () {
             Route::get('/login', [AuthController::class, 'login'])->name('login');
             Route::post('/login', [AuthController::class, 'authenticated'])->name('login');
-        });
 
-        Route::get('/logout', [AuthController::class, 'logout'])
-        ->middleware('auth')->name('logout');
+            Route::get('/forgot-password', [AuthController::class, 'login'])->name('password.request');
+
+        });
     }
 );

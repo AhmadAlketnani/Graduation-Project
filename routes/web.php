@@ -1,5 +1,5 @@
 <?php
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return redirect()->intended(route('admin.'));
 })->name('home');

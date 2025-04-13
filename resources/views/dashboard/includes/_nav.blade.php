@@ -408,7 +408,16 @@
                   <div class="dropdown-divider my-1"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="auth-login-cover.html" target="_blank"> <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span> </a>
+                  <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="icon-base ti ti-logout-2 icon-md me-3"></i>
+                        Logout
+                        <form id="logout-form" style="display: none;" action="{{ route('auth.logout') }}" method="post">
+                            @csrf
+                            @method('delete')
+                        </form>
+
+                    </a>
                 </li>
               </ul>
             </li>
