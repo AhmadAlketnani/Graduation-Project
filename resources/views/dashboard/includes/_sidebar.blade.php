@@ -62,11 +62,11 @@
 
     <ul class="menu-inner py-1">
 
-        <li class="menu-item @if (Request::segment(2) == 'planes') active open @endif">
+        {{-- <li class="menu-item @if (Request::segment(1) == 'admin') active open @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
-                {{-- <span class="badge rounded-pill bg-danger ms-auto">5</span> --}}
+                <span class="badge rounded-pill bg-danger ms-auto">5</span>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item active">
@@ -76,7 +76,7 @@
                 </li>
 
             </ul>
-        </li>
+        </li> --}}
 
 
 
@@ -85,17 +85,17 @@
 
         <li class="menu-item @if (Request::segment(2) == 'planes') active open @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-home-smile"></i>
+                <i class="menu-icon tf-icons ti ti-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Planes</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if (Request::segment(2) == 'planes' && Request::segment(3) == '') active @endif">
-                    <a href="{{ route('planes.index') }}" class="menu-link">
+                    <a href="{{ route('admin.planes.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Analytics">Show All</div>
                     </a>
                 </li>
                 <li class="menu-item @if (Request::segment(2) == 'planes' && Request::segment(3) == 'create') active @endif">
-                    <a href="{{ route('planes.create') }}" class="menu-link">
+                    <a href="{{ route('admin.planes.create') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Analytics">New One</div>
                     </a>
                 </li>

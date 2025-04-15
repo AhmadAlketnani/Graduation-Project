@@ -1,27 +1,27 @@
-<script >
-@if(session('success'))
+<script>
 
-        new Noty({
-            type: 'success',
-            layout: 'bottomRight',
-            text: "{{ session('success') }}",
-            timeout:3000,
-            killer:true
-        }).show();
-
-
-@endif
-@if(session('deleted'))
-
-        new Noty({
-            type: 'error',
-            layout: 'bottomRight',
-            text: "{{ session('deleted') }}",
-            timeout:3000,
-            killer:true
-        }).show();
-
-
-@endif
-
+    // show success message
+    @session('success')
+        Swal.fire({
+            icon: "success",
+            title: "{{ session('success') }}",
+            timer: 2000
+        });
+    @endsession
+    // show deleted message
+    @session('deleted')
+        Swal.fire({
+            icon: "error",
+            title: "{{ session('deleted') }}",
+            timer: 2000
+        });
+    @endsession
+    // show error message
+    @session('error')
+        Swal.fire({
+            icon: "error",
+            title: "{{ session('error') }}",
+            timer: 2000
+        });
+    @endsession
 </script>

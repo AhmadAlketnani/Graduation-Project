@@ -42,10 +42,8 @@
     <!-- Helpers -->
     <script src="{{asset('dashboard-asset/vendor/js/helpers.js') }}"></script>
 
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{asset('dashboard-asset/js/config.js') }}"></script>
-
-
-    @stack('css')
+    <script src="{{ asset('dashboard-asset/js/config.js') }}"></script>
+    <style id="custom-css"></style>
+    @stack('style')
 </head>
 

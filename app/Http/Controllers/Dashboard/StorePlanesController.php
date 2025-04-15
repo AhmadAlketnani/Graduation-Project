@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard\Store_planes;
 use Illuminate\Http\Request;
 
 class StorePlanesController extends Controller
@@ -20,7 +21,8 @@ class StorePlanesController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('dashboard.store_planes.create');
     }
 
     /**
@@ -28,7 +30,17 @@ class StorePlanesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'store_id' => 'required|exists:stores,id',
+            'planes_id' => 'required|exists:planes,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'product_insert' => 'required|integer',
+        ]);
+
+        Store_planes::create($request->all());
+        session()->flash('success', 'Store Plane created successfully.');
+        return back();
     }
 
     /**
@@ -44,7 +56,8 @@ class StorePlanesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $store_plane = Store_planes::findOrFail($id);
+        return view('dashboard.store_planes.edit', compact('store_plane'));
     }
 
     /**
@@ -52,7 +65,17 @@ class StorePlanesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        request()->validate([
+            'store_id' => 'required|exists:stores,id',
+            'planes_id' => 'required|exists:planes,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'product_insert' => 'required|integer',
+        ]);
+
+        Store_planes::findOrFail($id)->update($request->all());
+        session()->flash('success', 'Store Plane updated successfully.');
+        return back();
     }
 
     /**
@@ -60,6 +83,9 @@ class StorePlanesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $store_plane = Store_planes::findOrFail($id);
+        $store_plane->delete();
+        session()->flash('success', 'Store Plane deleted successfully.');
+        return back();
     }
 }

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\ProductStoreRequest;
 use App\Models\Dashboard\Category;
 use App\Models\Dashboard\Product;
+use App\Traits\ImagesStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    use ImagesStorage;
     /**
      * Display a listing of the resource.
      */
@@ -25,41 +28,25 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.products.create');
+        $categories = Category::all();
+        return view('dashboard.products.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
-            'QTY' => 'required|integer',
-            'description' => 'nullable|string',
-            'status' => "required|in:".Product::STATUS_ACTIVE,Product::STATUS_INACTIVE,
-            'store_id' => 'required|exists:stores,id'
-        ]);
-
-        $request_date = $request->except('images');
-
-        $images = [];
-        foreach ($request->images as $index => $image) {
-            $imageName = $index . '_' . $request->name . time() . '.' . $image->extension();
-            $path = "images/products/$request->name/" . $imageName;
-
-            Storage::disk('public')->put($path, file_get_contents($image));
-            array_push($images, $path);
-        }
-
-        $request_date['images'] = $images;
-
+        $validate = $request->validated();
+        $request_date = $validate->except('images');
+        $request_date['images'] = $this->storeImages(
+            $request->images,
+            $request->name,
+            "products/$request->name"
+        );
         Product::create($request_date);
         session()->flash('success', 'Product created successfully');
-        return redirect(route('Product.index'));
+        return redirect(route('products.index'));
     }
 
     /**
@@ -90,8 +77,9 @@ class ProductController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
             'QTY' => 'required|integer',
             'description' => 'nullable|string',
-            'status' => "required|in:".Product::STATUS_ACTIVE,Product::STATUS_INACTIVE,
-            'store_id' => 'required|exists:stores,id'
+            'status' => "required|in:" . Product::STATUS_ACTIVE,
+            Product::STATUS_INACTIVE,
+            // 'store_id' => 'required|exists:stores,id'
         ]);
 
         $request_date = $request->except('images');
@@ -111,7 +99,7 @@ class ProductController extends Controller
 
         $product->update($request_date);
         session()->flash('success', 'Product updated successfully');
-        return redirect(route('Product.index'));
+        return redirect(route('products.index'));
     }
 
     /**
@@ -124,6 +112,6 @@ class ProductController extends Controller
         }
         $product->delete();
         session()->flash('deleted', 'Product deleted successfully');
-        return redirect(route('Product.index'));
+        return redirect(route('products.index'));
     }
 }

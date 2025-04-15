@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('store_planes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->unsignedBigInteger('plane_id');
+            $table->foreign('plane_id')->references('id')->on('planes')->onDelete('cascade');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('product_insert');
             $table->timestamps();
         });
     }
