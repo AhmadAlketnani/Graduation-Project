@@ -18,7 +18,7 @@ Route::group(
              */
             Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
             Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-            Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+            Route::get('/reset-password/{email}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
             Route::post('/reset-password', [AuthController::class, 'reset'])->name('password.update');
 
             Route::get('/verify-email', [AuthController::class, 'login'])->name('verification.notice');

@@ -1,11 +1,11 @@
-<script src="{{ asset('dashboard-asset/vendor/libs/jquery/jquery.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/vendor/libs/jquery/jquery.js') }}"></script>
 
-<script src="{{ asset('dashboard-asset/vendor/libs/popper/popper.js') }}"></script>
-<script src="{{ asset('dashboard-asset/vendor/js/bootstrap.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/vendor/libs/popper/popper.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/vendor/js/bootstrap.js') }}"></script>
 
-<script src="{{ asset('dashboard-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-<script src="{{ asset('dashboard-asset/vendor/js/menu.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/vendor/js/menu.js') }}"></script>
 
 <!-- endbuild -->
 
@@ -13,7 +13,7 @@
 
 <!-- Main JS -->
 
-<script src="{{ asset('dashboard-asset/js/main.js') }}"></script>
+<script src="{{ asset('dashboard-auth-asset/js/main.js') }}"></script>
 
 <!-- Page JS -->
 

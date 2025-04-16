@@ -13,6 +13,7 @@ class ResetPasswordLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public string $email;
     public string $token;
     public string $resetLink;
 
@@ -46,6 +47,7 @@ class ResetPasswordLinkMail extends Mailable
         return new Content(
             view: 'dashboard.auth.mail.reset-password-link',
             with: [
+                'email' => $this->email,
                 'token' => $this->token,
                 'resetLink' => $this->resetLink,
             ],

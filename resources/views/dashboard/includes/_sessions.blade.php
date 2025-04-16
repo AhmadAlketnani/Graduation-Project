@@ -20,7 +20,8 @@
     @session('error')
         Swal.fire({
             icon: "error",
-            title: "{{ session('error') }}",
+            title: "{{ session('error')['title'] }}",
+            text: "{{ session('error')['message'] }}",
             timer: 2000
         });
     @endsession

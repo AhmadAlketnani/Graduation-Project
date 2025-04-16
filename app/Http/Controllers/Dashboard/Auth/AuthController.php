@@ -20,7 +20,7 @@ class AuthController extends Controller
             return redirect()->intended(route('admin.'));
         }
 
-        session()->flash('error', 'Invalid credentials.');
+        session()->put('error', ['title' => 'Login Failed', 'message' => 'Invalid credentials.']);
         return redirect()->back();
     }
 

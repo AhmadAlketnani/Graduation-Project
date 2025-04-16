@@ -11,7 +11,7 @@ use App\Http\Controllers\Dashboard\PermissionController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('dashboard.layout.app'); });
+        return view('dashboard.layouts.app'); });
 
     Route::resource('stores', StoreController::class);
     Route::resource('categories', CategoryController::class);

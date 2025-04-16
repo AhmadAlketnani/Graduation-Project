@@ -38,7 +38,10 @@ class ForgotPasswordController extends Controller
         Cache::put('password_reset_' . $request->email, $token, now()->addMinutes(10));
 
         // Send the email
-        Mail::to($request->email)->send(new ResetPasswordLinkMail($token, route('admin.auth.password.reset')));
+        Mail::to($request->email)->send(new ResetPasswordLinkMail(
+            $token,
+            route('admin.auth.password.reset', compact($request->email))
+        ));
 
         return response()->json(['message' => 'Reset password email sent successfully.']);
     }

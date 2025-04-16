@@ -1,4 +1,79 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="index.html" class="app-brand-link">
+            <span class="app-brand-logo demo">
+
+
+
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold"><img width="100px" src="{{ asset('assets/img/logo.png') }}"></span>
+        </a>
+
+        {{-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+            <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+        </a> --}}
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Dashboards -->
+        <li class="menu-item">
+            <a href="{{ route('admin.') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+              <div class="text-truncate" data-i18n="Basic">لوحة التحكم</div>
+            </a>
+          </li>
+
+
+        <li class="menu-item open">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{'المستخدمين'}}</div>
+            </a>
+            <ul class="menu-sub">
+                {{-- <li class="menu-item">
+                    <a href="index.html" class="menu-link">
+                        <div>عرض لوحة التحكم</div>
+                    </a>
+                </li> --}}
+                <li class="menu-item @if(request()->is('admin/provider')) active @endif">
+                    <a href="{{ route('admin.') }}" class="menu-link">
+                        <div>{{'Companies'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        <!-- Front Pages -->
+
+        <!-- e-commerce-app menu start -->
+        <li class="menu-item open">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-settings"></i>
+                <div>إدارة الحساب</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="app-ecommerce-dashboard.html" class="menu-link">
+                        <div>إعدادات الحساب</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="app-ecommerce-dashboard.html" class="menu-link">
+                        <div>إعدادات التطبيق</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- e-commerce-app menu end -->
+    </ul>
+</aside>
+
+
+{{-- <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo ">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
@@ -62,7 +137,7 @@
 
     <ul class="menu-inner py-1">
 
-        {{-- <li class="menu-item @if (Request::segment(1) == 'admin') active open @endif">
+        <li class="menu-item @if (Request::segment(1) == 'admin') active open @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
@@ -76,7 +151,7 @@
                 </li>
 
             </ul>
-        </li> --}}
+        </li>
 
 
 
@@ -103,4 +178,4 @@
         </li>
 
     </ul>
-</aside>
+</aside> --}}
