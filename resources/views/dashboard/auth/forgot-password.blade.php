@@ -30,7 +30,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    {{-- <script>
         document.getElementById('formAuthentication').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the default form submission
 
@@ -59,5 +59,5 @@
                 }, 60000); // 1 minute
             }, 1000); // Simulate a delay for form submission
         });
-    </script>
+    </script> --}}
 @endpush
