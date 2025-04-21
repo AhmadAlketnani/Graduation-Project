@@ -39,6 +39,7 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('dashboard-assets/js/config.js') }}"></script>
+    <script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     @stack('css')

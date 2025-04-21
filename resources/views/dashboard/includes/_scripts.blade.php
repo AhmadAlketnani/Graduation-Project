@@ -11,8 +11,6 @@
 <!-- Main JS -->
 <script src="{{asset('dashboard-assets/js/typeahead.js')}}"></script>
 <script src="{{asset('dashboard-assets/js/main.js')}}"></script>
-<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
-
 <script>
     $.ajaxSetup({
         headers: {
