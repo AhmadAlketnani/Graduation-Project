@@ -6,7 +6,8 @@
 
 
             </span>
-            <span class="app-brand-text demo menu-text fw-bold"><img width="100px" src="{{ asset('assets/img/logo.png') }}"></span>
+            <span class="app-brand-text demo menu-text fw-bold"><img width="100px"
+                    src="{{ asset('assets/img/logo.png') }}"></span>
         </a>
 
         {{-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -22,53 +23,75 @@
         <li class="menu-item">
             <a href="{{ route('admin.') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-              <div class="text-truncate" data-i18n="Basic">لوحة التحكم</div>
+                <div class="text-truncate" data-i18n="Basic">لوحة التحكم</div>
             </a>
-          </li>
+        </li>
 
-
+        {{-- User section --}}
         <li class="menu-item open">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>{{'المستخدمين'}}</div>
+                <div>{{ 'Users' }}</div>
             </a>
             <ul class="menu-sub">
-                {{-- <li class="menu-item">
-                    <a href="index.html" class="menu-link">
-                        <div>عرض لوحة التحكم</div>
+                <li class="menu-item active @if (request()->is('admin/provider'))  @endif">
+                    <a href="{{ route('admin.users.index') }}" class="menu-link">
+                        <div>{{ 'Show all' }}</div>
                     </a>
-                </li> --}}
-                <li class="menu-item @if(request()->is('admin/provider')) active @endif">
-                    <a href="{{ route('admin.') }}" class="menu-link">
-                        <div>{{'Companies'}}</div>
+                </li>
+                <li class="menu-item @if (request()->is('admin/provider')) active @endif">
+                    <a href="{{ route('admin.users.create') }}" class="menu-link">
+                        <div>{{ 'New User' }}</div>
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>{{-- end User section --}}
 
-
-        <!-- Front Pages -->
-
-        <!-- e-commerce-app menu start -->
+        {{-- category section --}}
         <li class="menu-item open">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div>إدارة الحساب</div>
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>{{ 'Users' }}</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="app-ecommerce-dashboard.html" class="menu-link">
-                        <div>إعدادات الحساب</div>
+
+                <li class="menu-item @if (request()->is('admin/provider')) active @endif">
+                    <a href="{{ route('admin.categories.index') }}" class="menu-link">
+                        <div>{{ 'Show all' }}</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="app-ecommerce-dashboard.html" class="menu-link">
-                        <div>إعدادات التطبيق</div>
+                <li class="menu-item @if (request()->is('admin/provider')) active @endif">
+                    <a href="{{ route('admin.categories.create') }}" class="menu-link">
+                        <div>{{ 'New category' }}</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <!-- e-commerce-app menu end -->
+
+        {{-- end category section --}}
+
+        {{-- Planes section --}}
+        <li class="menu-item @if (Request::segment(2) == 'planes') active open @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-home"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Planes</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if (Request::segment(2) == 'planes' && Request::segment(3) == '') active @endif">
+                    <a href="{{ route('admin.planes.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">Show All</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Request::segment(2) == 'planes' && Request::segment(3) == 'create') active @endif">
+                    <a href="{{ route('admin.planes.create') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="Analytics">New One</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
     </ul>
 </aside>
 

@@ -42,7 +42,7 @@
         zoomedImage.style.width = '200px';
         zoomedImage.style.height = '200px';
         zoomedImage.style.border = '1px solid #ccc';
-        zoomedImage.style.borderRadius = '10%';
+        zoomedImage.style.borderRadius = '5%';
         zoomedImage.style.background = '#fff';
         zoomedImage.style.zIndex = '1000';
         zoomedImage.id = 'zoomedImage';

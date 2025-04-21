@@ -34,7 +34,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
         $request_data = $request->except('image');
@@ -72,7 +73,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
         ]);
 
         $category->update($request->all());

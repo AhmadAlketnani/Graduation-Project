@@ -26,9 +26,9 @@
 
                                             <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
                                                 Search</button>
-                                            <a href="{{ route('admin.categories.create') }}" class="btn btn-outline-success"
-                                                data-bs-target="#addcategoryModal" data-bs-toggle="modal"><i
-                                                    class="ti ti-plus"></i> Add</i>
+                                            <a href="{{ route('admin.stores.create') }}" class="btn btn-outline-success"
+                                                data-bs-target="#addstoreModal" data-bs-toggle="modal"><i
+                                                    class="bx bx-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -53,10 +53,25 @@
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Image</span>
-                                            </th>
-                                            <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Name</span>
+                                            </th>
+                                            <th data-dt-column="3" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Email</span>
+                                            </th>
+                                            <th data-dt-column="4" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Phone</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Location</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Facebook</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Instagram</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">User</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Created_at</span>
@@ -67,30 +82,42 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
-                                        @foreach ($categories as $index => $category)
-                                            <tr id="{{ $category->id }}">
+                                        @foreach ($stores as $index => $store)
+                                            <tr id="{{ $store->id }}">
                                                 <td>{{ $index + 1 }}</td>
+                                                <td class="text-heading" id="{{ $store->id }}-name">
+                                                    <span class="fw-medium">{{ $store->name }}</span>
+                                                </td>
                                                 <td>
-                                                    <img class="img-thumbnail" src="{{ $category->image_url }}"
-                                                        alt="{{ $category->name }}" style="width: 50px; height: 50px;"
-                                                        loading="lazy"
-                                                        onmouseover="showZoomedImage('{{ $category->image_url }}')"
-                                                        onmouseout="hideZoomedImage()">
+                                                    <span class="text-truncate d-flex align-items-center text-heading"><i
+                                                            class="icon-base bx bx-dollar text-success me-2"></i><span
+                                                            id="{{ $store->id }}-email">{{ $store->email }}</span></span>
                                                 </td>
-                                                <td class="text-heading" id="{{ $category->id }}-name">
-                                                    <span class="fw-medium">{{ $category->name_en }}</span>
+                                                <td><span class="fw-medium"
+                                                        id="{{ $store->id }}-phone">{{ $store->phone }}</span>
                                                 </td>
-                                                <td>{{ $category->created_at }}</td>
+                                                <td><span id="{{ $store->id }}-location">{{ $store->location }}</span>
+                                                    Month
+                                                </td>
+                                                <td><span id="{{ $store->id }}-facebook">{{ $store->facebook }}</span>
+                                                    Month
+                                                </td>
+                                                <td><span
+                                                        id="{{ $store->id }}-instagram">{{ $store->instagram }}</span>
+                                                    Month
+                                                </td>
+                                                <td>{{ $store->user->name }}</td>
+                                                <td>{{ $store->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.categories.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            onclick="showEditModalProduct('{{ route('admin.stores.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
                                                             data-bs-toggle="modal"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.categories.destroy', $product->id) }}"
+                                                            action="{{ route('admin.stores.destroy', $product->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
@@ -114,12 +141,12 @@
                             </div>
                         </div>
                         <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
-                            @if ($categories->count() > 0)
-                                {{ $categories->appends(request()->query())->links() }}
+                            @if ($stores->count() > 0)
+                                {{ $stores->appends(request()->query())->links() }}
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                        Sorry no category like this
+                                        Sorry no store like this
                                     @else
                                         Sorry no data found
                                     @endif
@@ -132,7 +159,6 @@
             <!--/ Role Table -->
         </div>
     </div>
-
 
 
 @endsection

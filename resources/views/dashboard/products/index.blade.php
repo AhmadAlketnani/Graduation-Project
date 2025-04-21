@@ -1,5 +1,28 @@
 @extends('dashboard.layouts.app')
 
+@push('css')
+    <style>
+        .img-wrapper {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .img-wrapper .delete-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            opacity: 0;
+            transition: opacity 0.2s;
+
+        }
+
+        .img-wrapper:hover .delete-btn {
+            opacity: 1;
+        }
+    </style>
+@endpush
+
 @section('content')
 
     <div class="row">
@@ -24,11 +47,11 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
-                                            <a href="#" class="btn btn-outline-success"
+                                            <a href="{{ route('admin.products.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#addProductModal" data-bs-toggle="modal"><i
-                                                    class="bx bx-plus"></i> Add</i>
+                                                    class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -38,7 +61,8 @@
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
                         <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
-                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
+                            <div
+                                class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -52,11 +76,9 @@
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Image</span>
+                                                    class="dt-column-title">Name </span>
                                             </th>
-                                            <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Name</span>
-                                            </th>
+
                                             <th data-dt-column="3" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Price</span>
                                             </th>
@@ -70,10 +92,10 @@
                                                     class="dt-column-title">Status</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Store_id</span>
+                                                    class="dt-column-title">Store</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Categorise_id</span>
+                                                    class="dt-column-title">Categorise</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Created_at</span>
@@ -86,17 +108,9 @@
                                     <tbody id="table_body">
                                         @foreach ($products as $index => $product)
                                             <tr id="{{ $product->id }}">
-                                                <td>{{ $index + 1 }}</td>
+                                                <td rowspan="2">{{ $index + 1 }}</td>
                                                 <td class="text-heading" id="{{ $product->id }}-name">
-                                                    <span class="fw-medium">{{ $product->name }}</span>
-                                                </td>
-
-                                                <td>
-                                                    <img class="img-thumbnail" src="{{ $product->image_url }}"
-                                                            alt="{{ $product->name }}" style="width: 50px; height: 50px;"
-                                                            loading="lazy"
-                                                            onmouseover="showZoomedImage('{{ $product->image_url }}')"
-                                                            onmouseout="hideZoomedImage()">
+                                                    <span class="fw-medium">{{ $product->name_en }}</span>
                                                 </td>
                                                 <td>
                                                     <span class="text-truncate d-flex align-items-center text-heading"><i
@@ -106,33 +120,71 @@
                                                 <td><span class="fw-medium"
                                                         id="{{ $product->id }}-QTY">{{ $product->QTY }}</span>
                                                 </td>
-                                                <td><span id="{{ $product->id }}-description">{{ $product->description }}</span> Month
+                                                <td><span
+                                                        id="{{ $product->id }}-description">{{ $product->description }}</span>
+                                                    Month
                                                 </td>
                                                 <td id="{{ $product->id }}-status"><span
                                                         class="badge bg-label-{{ $product->status == App\Models\Dashboard\Product::STATUS_ACTIVE ? 'success' : 'danger' }}"
                                                         text-capitalized="">{{ $product->status }}</span>
                                                 </td>
-                                                {{-- <td id="{{ $product->id }}-store_id">{{ $product->store->name }}</td> --}}
-                                                <td id="{{ $product->id }}-category_id">{{ $product->category->name }}</td>
+                                                <td id="{{ $product->id }}-store_id">{{ $product->store->name }}</td>
+                                                <td id="{{ $product->id }}-category_id">
+                                                    @foreach ($product->categories as $category)
+                                                        <span class="badge bg-label-success">{{ $category->name_en }}</span>
+                                                    @endforeach
+                                                </td>
 
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('products.edit', $product->id) }}', '{{ route('products.update', $product->id) }}')"
-                                                            data-bs-toggle="modal" class="btn-sm btn-icon text-warning "><i
-                                                                class="icon-base bx bx-edit-alt icon-md"></i></a>
+                                                            onclick="showEditModalProduct('{{ route('admin.products.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            data-bs-toggle="modal"
+                                                            class="btn-sm btn-icon text-warning "><i
+                                                                class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('products.destroy', $product->id) }}"
+                                                            action="{{ route('admin.products.destroy', $product->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
+
+                                                            {{-- <a href="javascript:;" class="btn btn-icon delete-record">
+                                                                <i class="icon-base bx bx-trash icon-md"></i></a> --}}
+
                                                             <button type="submit"
-                                                                class="btn-sm  btn-icon text-danger "><i
-                                                                    class="icon-base bx bx-trash icon-md"></i> </button>
+                                                                class=" btn btn-icon text-danger rounded-circle delete">
+                                                                {{-- class=" btn btn-sm btn-icon text-danger rounded-circle delete"> --}}
+                                                                <i class="icon-base ti ti-trash icon-md"></i> </button>
                                                         </form>
 
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Images</td>
+                                                <td colspan="9">
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        @foreach ($product->images_url as $image)
+                                                            <div class="img-wrapper">
+                                                                <img class="img-thumbnail" src="{{ $image }}"
+                                                                    alt="{{ $product->name }}"
+                                                                    style="width: 50px; height: 50px;" loading="lazy"
+                                                                    onmouseover="showZoomedImage('{{ $image }}')"
+                                                                    onmouseout="hideZoomedImage()">
+
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-light rounded-circle p-1 delete-btn"
+                                                                    style="width: 20px; height: 20px; font-size: 10px;"
+                                                                    onclick="deleteImage('{{ $image }}', '{{ $product->id }}')">
+                                                                    <i class="ti ti-x"></i>
+                                                                </button>
+
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </td>
                                             </tr>
@@ -173,7 +225,7 @@
 
                     <!-- Add role form -->
                     <form id="addProductForm" class="row mt-3 g-6" onsubmit="return false"
-                        action="{{ route('products.store') }}">
+                        action="{{ route('admin.products.store') }}">
                         @csrf
                         {{-- Full input  --}}
                         <div class="row ">
