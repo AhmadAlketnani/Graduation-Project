@@ -1,7 +1,7 @@
 <!doctype html>
 
-<html lang="en" class="layout-wide customizer-hide" data-assets-path="{{ asset('dashboard-asset') }}"
-    data-template="vertical-menu-template-free">
+<html lang="en" class="layout-wide customizer-hide" data-assets-path="{{ asset('dashboard-auth-asset') }}"
+    data-template="vertical-menu-template-free" data-bs-theme="light">
 
 @include('dashboard.auth.includes._head')
 
@@ -71,6 +71,7 @@
                                 <span class="app-brand-text demo text-heading fw-bold">Injaz Dashboard</span>
                             </a>
                         </div>
+                        @include('dashboard.includes._errors')
                         @yield('content')
 
                     </div>

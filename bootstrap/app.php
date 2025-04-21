@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Dashboard\Auth\EnsureTokenIsVerified;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -24,9 +25,15 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo(function () {
             return request()->is('admin') || request()->is('admin/*')
-            ? route('admin.auth.login') : route('auth.login');
+                ? route('admin.auth.login') : route('auth.login');
         });
-        
+
+        $middleware->alias(
+            [
+                'TokenIsVerified' => EnsureTokenIsVerified::class,
+            ]
+        );
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

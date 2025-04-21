@@ -7,24 +7,19 @@ use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request )
     {
-        return view('dashboard.auth.reset-password', [
-            'token' => $token,
-            'email' => $request->email,
-        ]);
+        // check the request verfiy
+        return view('dashboard.auth.pages.reset-password');
     }
 
     public function reset(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
             'password' => 'required|confirmed|min:8',
-            'token' => 'required',
         ]);
 
-        // Validate the token and reset the password
-        // ...
+
 
         return response()->json(['message' => 'Password reset successfully.']);
     }
