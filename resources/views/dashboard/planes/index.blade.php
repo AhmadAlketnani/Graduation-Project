@@ -26,9 +26,9 @@
 
                                             <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
                                                 Search</button>
-                                            <a href="{{ route('admin.categories.create') }}" class="btn btn-outline-success"
-                                                data-bs-target="#addcategoryModal" data-bs-toggle="modal"><i
-                                                    class="ti ti-plus"></i> Add</i>
+                                            <a href="{{ route("admin.planes.create") }}" class="btn btn-outline-success"
+                                                data-bs-target="#addplaneModal" data-bs-toggle="modal"><i
+                                                    class="bx bx-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -38,8 +38,7 @@
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
                         <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
-                            <div
-                                class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
+                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -53,10 +52,19 @@
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Image</span>
-                                            </th>
-                                            <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Name</span>
+                                            </th>
+                                            <th data-dt-column="3" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Price</span>
+                                            </th>
+                                            <th data-dt-column="4" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Product_numbers</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Period</span>
+                                            </th>
+                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Status</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Created_at</span>
@@ -67,30 +75,37 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
-                                        @foreach ($categories as $index => $category)
-                                            <tr id="{{ $category->id }}">
+                                        @foreach ($planes as $index => $plane)
+                                            <tr id="{{ $plane->id }}">
                                                 <td>{{ $index + 1 }}</td>
+                                                <td class="text-heading" id="{{ $plane->id }}-name">
+                                                    <span class="fw-medium">{{ $plane->name }}</span>
+                                                </td>
                                                 <td>
-                                                    <img class="img-thumbnail" src="{{ $category->image_url }}"
-                                                        alt="{{ $category->name }}" style="width: 50px; height: 50px;"
-                                                        loading="lazy"
-                                                        onmouseover="showZoomedImage('{{ $category->image_url }}')"
-                                                        onmouseout="hideZoomedImage()">
+                                                    <span class="text-truncate d-flex align-items-center text-heading"><i
+                                                            class="icon-base bx bx-dollar text-success me-2"></i><span
+                                                            id="{{ $plane->id }}-price">{{ $plane->price }}</span></span>
                                                 </td>
-                                                <td class="text-heading" id="{{ $category->id }}-name">
-                                                    <span class="fw-medium">{{ $category->name_en }}</span>
+                                                <td><span class="fw-medium"
+                                                        id="{{ $plane->id }}-QTY">{{ $plane->product_numbers }}</span>
                                                 </td>
-                                                <td>{{ $category->created_at }}</td>
+                                                <td><span id="{{ $plane->id }}-description">{{ $plane->period }}</span> Month
+                                                </td>
+                                                <td id="{{ $plane->id }}-status"><span
+                                                        class="badge bg-label-{{ $plane->status == App\Models\Dashboard\plane::STATUS_ACTIVE ? 'success' : 'danger' }}"
+                                                        text-capitalized="">{{ $plane->status }}</span>
+                                                </td>
+                                                <td>{{ $plane->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.categories.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            onclick="showEditModalProduct('{{ route('admin.planes.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
                                                             data-bs-toggle="modal"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.categories.destroy', $product->id) }}"
+                                                            action="{{ route('admin.planes.destroy', $product->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
@@ -114,12 +129,12 @@
                             </div>
                         </div>
                         <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
-                            @if ($categories->count() > 0)
-                                {{ $categories->appends(request()->query())->links() }}
+                            @if ($planes->count() > 0)
+                                {{ $planes->appends(request()->query())->links() }}
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                        Sorry no category like this
+                                        Sorry no plane like this
                                     @else
                                         Sorry no data found
                                     @endif
@@ -132,7 +147,6 @@
             <!--/ Role Table -->
         </div>
     </div>
-
 
 
 @endsection

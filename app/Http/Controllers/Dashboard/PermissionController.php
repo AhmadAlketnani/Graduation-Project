@@ -36,7 +36,7 @@ class PermissionController extends Controller
         ]);
         Permission::create($request->all());
         session()->flash('success', 'Permission created successfully');
-        return redirect(route('permissions.index'));
+        return redirect(route('admin.permissions.index'));
     }
 
     /**
@@ -65,7 +65,7 @@ class PermissionController extends Controller
         ]);
         $permission->update($request->all());
         session()->flash('success', 'Permission updated successfully');
-        return redirect(route('permissions.index'));
+        return redirect(route('admin.permissions.index'));
     }
 
     /**
@@ -75,6 +75,6 @@ class PermissionController extends Controller
     {
         $permission->delete();
         session()->flash('deleted', 'Permission deleted successfully');
-        return redirect(route('permissions.index'));
+        return redirect(route('admin.permissions.index'));
     }
 }

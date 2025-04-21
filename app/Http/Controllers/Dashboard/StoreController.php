@@ -51,7 +51,7 @@ class StoreController extends Controller
         Store::create($request->all());
 
         session()->flash('success', 'Store created successfully.');
-        return redirect(route('dashboard.stores.index'));
+        return redirect(route('admin.stores.index'));
     }
 
     /**
@@ -88,7 +88,7 @@ class StoreController extends Controller
         $store->update($request->all());
 
         session()->flash('success', 'Store updated successfully.');
-        return redirect(route('dashboard.stores.index'));
+        return redirect(route('admin.stores.index'));
     }
 
     /**
@@ -99,6 +99,6 @@ class StoreController extends Controller
         $store->delete();
 
         session()->flash('deleted', 'Store deleted successfully.');
-        return redirect(route('dashboard.stores.index'));
+        return redirect(route('admin.stores.index'));
     }
 }

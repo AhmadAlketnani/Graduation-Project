@@ -51,7 +51,7 @@ class PlaneController extends Controller
             );
         }
         session()->flash('success', 'Plane created successfully');
-        return redirect(route('planes.index'));
+        return redirect(route('admin.planes.index'));
 
     }
 
@@ -111,6 +111,6 @@ class PlaneController extends Controller
     {
         $plane->delete();
         session()->flash('deleted', 'Plane deleted successfully');
-        return redirect(route('planes.index'));
+        return redirect(route('admin.planes.index'));
     }
 }

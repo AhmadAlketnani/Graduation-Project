@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name_en','name_ar',];
 
     public function scopeWhenSearch($query, $search)
     {

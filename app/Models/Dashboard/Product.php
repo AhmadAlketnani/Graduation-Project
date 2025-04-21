@@ -2,13 +2,17 @@
 
 namespace App\Models\Dashboard;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'price', 'images', 'QTY', 'description', 'status', 'store_id', 'Category_id'];
+   use HasFactory;
+    protected $fillable = ['name_en','name_ar', 'price', 'images', 'QTY', 'description_en','description_ar', 'status', 'store_id'];
 
-    protected $appends = ['image_url'];
+    protected $appends = ['images_url'];
     protected $casts = [
         'images' => 'array'
     ];
@@ -17,8 +21,40 @@ class Product extends Model
     const STATUS_INACTIVE = 'inactive';
 
 
+    public function getImagesUrlAttribute()
+    {
+        $images = [];
+        foreach ($this->images as $image) {
+            $images[] = filter_var($image, FILTER_VALIDATE_URL) ? $image : Storage::disk('public')->url($image);
+        }
 
+        return $images;
+    }
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
+// relationships-----------------------------------
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'product_category' );
+    }
+
+    // scopes-----------------------------------
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search, function ($q) use ($search) {
+            return $q->where('name_en', 'like', "%$search%");
+        });
+
+    }
 
     public function scopeWhenStores($query, $store_id)
     {
@@ -39,28 +75,5 @@ class Product extends Model
 
             });
         });
-    }
-// relationships-----------------------------------
-    public function store()
-    {
-        return $this->belongsTo(Store::class);
-    }
-
-    public function categories()
-    {
-        return $this->belongsTo(Category::class,'category_id' );
-    }
-    public function getImageUrlAttribute()
-    {
-        return $this->images ? asset('storage/' . $this->images[0]) : null;
-    }
-
-    // scopes-----------------------------------
-    public function scopeWhenSearch($query, $search)
-    {
-        return $query->when($search, function ($q) use ($search) {
-            return $q->where('name', 'like', "%$search%");
-        });
-
     }
 }

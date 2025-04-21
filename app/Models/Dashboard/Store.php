@@ -2,13 +2,16 @@
 
 namespace App\Models\Dashboard;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Dashboard\Plane;
 use App\Models\Dashboard\Store_planes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'name',
         'email',
@@ -36,7 +39,9 @@ class Store extends Model
     {
         return $this->belongsTo(Store_planes::class, 'store_id');
     }
-
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->diffForHumans();
+    }
     // scopes----------------------------------------------
     public function scopeWhenSearch($query, $search)
     {

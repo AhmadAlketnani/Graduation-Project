@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\ProductStoreRequest;
-use App\Models\Dashboard\Category;
-use App\Models\Dashboard\Product;
-use App\Traits\ImagesStorage;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Traits\ImagesStorage;
+use App\Models\Dashboard\Store;
+use App\Models\Dashboard\Product;
+use App\Models\Dashboard\Category;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Dashboard\ProductStoreRequest;
 
 class ProductController extends Controller
 {
@@ -29,7 +31,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('dashboard.products.create', compact('categories'));
+        $stores = Store::all();
+        return view('dashboard.products.create', compact('categories', 'stores'));
     }
 
     /**
@@ -38,15 +41,17 @@ class ProductController extends Controller
     public function store(ProductStoreRequest $request)
     {
         $validate = $request->validated();
-        $request_date = $validate->except('images');
+        $request_date = $request->except('images');
         $request_date['images'] = $this->storeImages(
             $request->images,
             $request->name,
             "products/$request->name"
         );
-        Product::create($request_date);
+
+        $product = Product::create($request_date);
+        $product->categories()->attach($request->categories);
         session()->flash('success', 'Product created successfully');
-        return redirect(route('products.index'));
+        return redirect(route('admin.products.index'));
     }
 
     /**
@@ -71,12 +76,14 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
             'price' => 'required|numeric',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
             'QTY' => 'required|integer',
-            'description' => 'nullable|string',
+            'description_en' => 'nullable|string',
+            'description_ar' => 'nullable|string',
             'status' => "required|in:" . Product::STATUS_ACTIVE,
             Product::STATUS_INACTIVE,
             // 'store_id' => 'required|exists:stores,id'
@@ -99,7 +106,7 @@ class ProductController extends Controller
 
         $product->update($request_date);
         session()->flash('success', 'Product updated successfully');
-        return redirect(route('products.index'));
+        return redirect(route('admin.products.index'));
     }
 
     /**
@@ -112,6 +119,6 @@ class ProductController extends Controller
         }
         $product->delete();
         session()->flash('deleted', 'Product deleted successfully');
-        return redirect(route('products.index'));
+        return redirect(route('admin.products.index'));
     }
 }
