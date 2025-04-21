@@ -1,4 +1,4 @@
-@extends('dashboard.layout.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
 
@@ -37,8 +37,8 @@
 
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
-                        <div class="justify-content-between dt-layout-table">
-                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layout-full col-md">
+                        <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
+                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 

@@ -1,4 +1,4 @@
-{{-- @extends('dashboard.layout.app')
+{{-- @extends('dashboard.layouts.app')
 
 @section('content')
 
@@ -93,7 +93,7 @@
 @endsection --}}
 
 
-@extends('dashboard.layout.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
 
@@ -132,8 +132,8 @@
 
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
-                        <div class="justify-content-between dt-layout-table">
-                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layout-full col-md">
+                        <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
+                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -162,7 +162,7 @@
                                         @foreach ($permissions as $index => $permission)
                                             <tr id="{{ $permission->id }}">
                                                 <td>{{ $index + 1 }}</td>
-                                                
+
                                                 <td class="text-heading" id="{{ $permission->id }}-name">
                                                     <span class="fw-medium">{{ $permission->name }}</span>
                                                 </td>
@@ -173,12 +173,12 @@
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editpermissionModal"
-                                                            onclick="showEditModalpermission('{{ route('permissions.show', $permission->id) }}', '{{ route('permissions.update', $permission->id) }}')"
+                                                            onclick="showEditModalpermission('{{ route('admin.permissions.show', $permission->id) }}', '{{ route('permissions.update', $permission->id) }}')"
                                                             data-bs-toggle="modal" class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base bx bx-edit-alt icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('permissions.destroy', $permission->id) }}"
+                                                            action="{{ route('admin.permissions.destroy', $permission->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
@@ -226,7 +226,7 @@
 
                     <!-- Add role form -->
                     <form id="addpermissionForm" class="row mt-3 g-6" onsubmit="return false"
-                        action="{{ route('permissions.store') }}">
+                        action="{{ route('admin.permissions.store') }}">
                         @csrf
                         {{-- Full input  --}}
                         <div class="row ">

@@ -10,9 +10,11 @@ class Category extends Model
 {
     protected $fillable = ['name','image'];
 
-    public function getImageAttribute($val)
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute($val)
     {
-        return Storage::disk('public')->url($val);
+        return Storage::disk('public')->url($this->image);
     }
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->diffForHumans();

@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
+
         $categories = Category::whenSearch(request()->search)->paginate(8);
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
         Category::create($request_data);
         session()->flash('success', 'Category created successfully');
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -77,7 +77,7 @@ class CategoryController extends Controller
 
         $category->update($request->all());
         session()->flash('success', 'Category updated successfully');
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -87,6 +87,6 @@ class CategoryController extends Controller
     {
         $category->delete();
         session()->flash('deleted', 'Category deleted successfully');
-        return redirect(route('categories.index'));
+        return redirect(route('admin.categories.index'));
     }
 }
