@@ -19,7 +19,7 @@
 
     <!-- Message -->
     <p style="color: #666; font-size: 15px; line-height: 1.5; margin-bottom: 30px;">
-        Use the following 6-digit code to reset your password. Click the button below to choose a new password.
+        Your verification code is: {{-- Click the button below to choose a new password. --}}
     </p>
 
       <!-- Code Box -->
@@ -28,9 +28,9 @@
       </div>
 
     <!-- Reset Button -->
-    <a href="{{ $resetLink }}" target="_blank" style="background-color: #696cff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
+    {{-- <a href="{{ $resetLink }}" target="_blank" style="background-color: #696cff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
       Reset Password
-    </a>
+    </a> --}}
 
     <!-- Footer -->
     <p style="color: #888; font-size: 13px; margin-top: 30px;">

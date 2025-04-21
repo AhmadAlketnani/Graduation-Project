@@ -1,3 +1,18 @@
+
+<script src="{{asset('dashboard-assets/vendor/libs/jquery/jquery.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/popper/popper.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/bootstrap.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/hammer/hammer.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/menu.js')}}"></script>
+<!-- endbuild -->
+<script src="{{asset('dashboard-assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+<link rel="stylesheet" href="{{asset('dashboard-assets/vendor/libs/toastr/toastr.js')}}" />
+<!-- Main JS -->
+<script src="{{asset('dashboard-assets/js/typeahead.js')}}"></script>
+<script src="{{asset('dashboard-assets/js/main.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
+=======
 <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
 <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
@@ -10,6 +25,7 @@
 <!-- Main JS -->
 <script src="{{ asset('assets/js/typeahead.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
@@ -51,6 +67,33 @@
 
 
 
+// toastr.options = {
+//     "closeButton": false,
+//     "debug": false,
+//     "newestOnTop": false,
+//     "progressBar": false,
+//     "positionClass": "toastr-top-right",
+//     "preventDuplicates": false,
+//     "onclick": null,
+//     "showDuration": "300",
+//     "hideDuration": "1000",
+//     "timeOut": "5000",
+//     "extendedTimeOut": "1000",
+//     "showEasing": "swing",
+//     "hideEasing": "linear",
+//     "showMethod": "fadeIn",
+//     "hideMethod": "fadeOut"
+//     };
+//     @if(session('message'))
+//         Swal.fire({
+//             title: 'خطأ!',
+//             text: "{{session('message')}}",
+//             icon: "{{session('m-class',"error")}}",
+//         })
+//         {{Session::forget('message')}}
+//     @endif
+
+
     // toastr.options = {
     //     "closeButton": false,
     //     "debug": false,
@@ -76,6 +119,7 @@
     //         })
     //         {{ Session::forget('message') }}
     //     @endif
+
 </script>
 @stack('scripts')
 

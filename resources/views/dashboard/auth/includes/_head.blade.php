@@ -24,11 +24,14 @@
 
     <link rel="stylesheet" href="{{ asset('dashboard-auth-asset/vendor/css/core.css') }}" />
     <link rel="stylesheet" href="{{ asset('dashboard-auth-asset/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dashboard-auth-asset/vendor/css/pages/page-auth.css') }}">
+
     <link rel="stylesheet" href="{{ asset('dashboard-auth-asset/icons/tabler-icons.css') }}" />
 
     <!-- Vendors CSS -->
 
-    <link rel="stylesheet" href="{{ asset('dashboard-auth-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('dashboard-auth-asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <!-- endbuild -->
 

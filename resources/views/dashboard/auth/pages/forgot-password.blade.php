@@ -1,7 +1,5 @@
 @extends('dashboard.auth.layout.app')
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('dashboard-asset/vendor/css/pages/page-auth.css') }}" />
-@endpush
+
 @section('content')
     <h4 class="mb-1">Forgot Password? 🔒</h4>
     <p class="mb-6">Enter your email and we'll send you instructions to reset your password</p>

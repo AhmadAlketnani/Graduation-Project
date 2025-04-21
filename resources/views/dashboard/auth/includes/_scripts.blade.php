@@ -7,6 +7,7 @@
 
 <script src="{{ asset('dashboard-auth-asset/vendor/js/menu.js') }}"></script>
 
+
 <!-- endbuild -->
 
 <!-- Vendors JS -->
@@ -17,7 +18,37 @@
 
 <!-- Page JS -->
 
-<!-- Place this tag before closing body tag for github widget button. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
+
+<script>
+    // This function is used to toggle the password visibility
+    function toggle(span, password) {
+        // Get the input field and check if it is a password field
+        const input = document.querySelector('#' + password);
+        const icon = span.querySelector('i');
+        // Toggle the type attribute
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        // Toggle icon class only
+        icon.classList.toggle('ti-eye');
+        icon.classList.toggle('ti-eye-off');
+
+    }
+
+    function togglePassword(span) {
+        console.log(span);
+
+    const input = span.parentElement.querySelector('input');
+    const icon = span.querySelector('i');
+
+    // Toggle the type attribute
+    const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        // Toggle icon class only
+        icon.classList.toggle('ti-eye');
+        icon.classList.toggle('ti-eye-off');
+  }
+</script>
+
 
 @stack('scripts')
