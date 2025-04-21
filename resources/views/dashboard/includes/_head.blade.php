@@ -21,8 +21,8 @@
 
     <!-- Core CSS -->
 
-    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/core-dark.css') }}" class="theme-stylesheet template-customizer-core-css" />
-    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/theme-default-dark.css') }}" class="theme-stylesheet template-customizer-theme-css"/>
+    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/core.css') }}" class="theme-stylesheet template-customizer-core-css" />
+    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/theme-default.css') }}" class="theme-stylesheet template-customizer-theme-css"/>
 
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/demo.css') }}" />
 
