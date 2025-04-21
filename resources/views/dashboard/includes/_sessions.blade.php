@@ -4,7 +4,8 @@
     @session('success')
         Swal.fire({
             icon: "success",
-            title: "{{ session('success') }}",
+            title: "{{ session('success')['title'] }}",
+            text: "{{ session('success')['message'] }}",
             timer: 2000
         });
     @endsession

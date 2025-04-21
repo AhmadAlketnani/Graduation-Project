@@ -1,15 +1,16 @@
-<script src="{{asset('assets/vendor/libs/jquery/jquery.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/popper/popper.js')}}"></script>
-<script src="{{asset('assets/vendor/js/bootstrap.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/hammer/hammer.js')}}"></script>
-<script src="{{asset('assets/vendor/js/menu.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/jquery/jquery.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/popper/popper.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/bootstrap.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/libs/hammer/hammer.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/menu.js')}}"></script>
 <!-- endbuild -->
-<script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.js')}}" />
+<script src="{{asset('dashboard-assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+<link rel="stylesheet" href="{{asset('dashboard-assets/vendor/libs/toastr/toastr.js')}}" />
 <!-- Main JS -->
-<script src="{{asset('assets/js/typeahead.js')}}"></script>
-<script src="{{asset('assets/js/main.js')}}"></script>
+<script src="{{asset('dashboard-assets/js/typeahead.js')}}"></script>
+<script src="{{asset('dashboard-assets/js/main.js')}}"></script>
+<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
 <script>
 
 $.ajaxSetup({
@@ -17,7 +18,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
 
 // toastr.options = {
 //     "closeButton": false,
