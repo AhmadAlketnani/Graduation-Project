@@ -18,6 +18,25 @@
         }
     });
 
+    $(document).on('click', '.delete', function(e) {
+        e.preventDefault();
+
+        var form = $(this).closest('form');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
 
 
     function showZoomedImage(image) {
@@ -29,7 +48,7 @@
         zoomedImage.style.border = '1px solid #ccc';
         zoomedImage.style.borderRadius = '5%';
         zoomedImage.style.background = '#fff';
-        zoomedImage.style.zIndex = '1000';
+        zoomedImage.style.zIndex = '1000000000000000000000000000000';
         zoomedImage.id = 'zoomedImage';
 
         document.body.appendChild(zoomedImage);

@@ -41,6 +41,7 @@
     <script src="{{asset('dashboard-assets/js/config.js') }}"></script>
     <script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @stack('css')
   </head>

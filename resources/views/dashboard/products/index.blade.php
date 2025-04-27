@@ -50,7 +50,8 @@
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
                                             <a href="{{ route('admin.products.create') }}" class="btn btn-outline-success"
-                                                data-bs-target="#addProductModal" data-bs-toggle="modal"><i
+                                                {{-- data-bs-target="#addProductModal" data-bs-toggle="modal" --}}
+                                                ><i
                                                     class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}

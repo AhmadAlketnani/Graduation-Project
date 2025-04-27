@@ -99,13 +99,13 @@
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.planes.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            onclick="showEditModalProduct('{{ route('admin.planes.edit', $plane->id) }}', '{{ route('admin.planes.update', $plane->id) }}')"
                                                             data-bs-toggle="modal"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.planes.destroy', $product->id) }}"
+                                                            action="{{ route('admin.planes.destroy', $plane->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')

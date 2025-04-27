@@ -36,7 +36,7 @@ class RoleController extends Controller
 
         Role::create($request->all());
         session()->flash('success', 'Role created successfully');
-        return redirect(route('roles.index'));
+        return redirect(route('admin.roles.index'));
     }
 
     /**
@@ -66,7 +66,7 @@ class RoleController extends Controller
 
         Role::findOrFail($id)->update($request->all());
         session()->flash('success', 'Role updated successfully');
-        return redirect(route('roles.index'));
+        return redirect(route('admin.roles.index'));
     }
 
     /**
@@ -76,6 +76,6 @@ class RoleController extends Controller
     {
         Role::findOrFail($id)->delete();
         session()->flash('deleted', 'Role deleted successfully');
-        return redirect(route('roles.index'));
+        return redirect(route('admin.roles.index'));
     }
 }

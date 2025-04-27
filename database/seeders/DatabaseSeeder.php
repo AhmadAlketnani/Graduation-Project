@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'ahmad',
             'email' => 'ahmad@gmail.com',
             'password' => bcrypt('12345678'),
+            'status' => User::STATUS_ACTIVE,
         ]);
         User::factory(200)->create();
         $categories = Category::factory(200)->create();

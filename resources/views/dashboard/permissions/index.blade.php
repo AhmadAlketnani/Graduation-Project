@@ -78,13 +78,13 @@
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.permissions.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            onclick="showEditModalProduct('{{ route('admin.permissions.edit', $permission->id) }}', '{{ route('admin.permissions.update', $permission->id) }}')"
                                                             data-bs-toggle="modal"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.permissions.destroy', $product->id) }}"
+                                                            action="{{ route('admin.permissions.destroy', $permission->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
