@@ -27,20 +27,15 @@ id="layout-navbar">
                 <i class="ti ti-language rounded-circle ti-md"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <li>
-                    <a class="dropdown-item {{-- @if(lang() == 'en') active @endif --}}"
-                    href="{{ URL::to('lang/en') }}" data-language="en"
-                        data-text-direction="ltr">
-                        <span>{{'English'}}</span>
+                    <a class="dropdown-item {{ LaravelLocalization::getCurrentLocale() == $localeCode ? 'active' : '' }}"
+                    href="{{ LaravelLocalization::getLocalizedUrl($localeCode)}}" data-language="{{ $localeCode }}"
+                        data-text-direction="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+                        <span>{{ $properties['native'] }}</span>
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item {{-- @if(lang() == 'ar') active @endif --}}"
-                    href="{{ URL::to('lang/ar') }}" data-language="ar"
-                        data-text-direction="rtl">
-                        <span>{{'Arabic'}}</span>
-                    </a>
-                </li>
+                @endforeach
             </ul>
         </li>
         <!--/ Language -->
@@ -389,7 +384,7 @@ id="layout-navbar">
                         <a class="dropdown-item" href="{{ route('auth.logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="ti ti-power me-3 ti-md"></i>
-                        <span>Log Out</span>
+                        <span>{{ __('dashboard/sidebar.logout') }}</span>
                         </a>
                         <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
                             @csrf

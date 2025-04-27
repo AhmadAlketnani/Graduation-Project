@@ -23,15 +23,15 @@
         <li class="menu-item">
             <a href="{{ route('admin.') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div class="text-truncate" data-i18n="Basic">لوحة التحكم</div>
+                <div class="text-truncate" data-i18n="Basic">{{ __('dashboard/sidebar.dashboard') }}</div>
             </a>
         </li>
 
         {{-- User section --}}
-        <li class="menu-item open">
+        <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>{{ 'Users' }}</div>
+                <div>{{ __('dashboard/sidebar.users') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item active @if (request()->is('admin/provider'))  @endif">
@@ -48,10 +48,10 @@
         </li>{{-- end User section --}}
 
         {{-- category section --}}
-        <li class="menu-item open">
+        <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>{{ 'Users' }}</div>
+                <div>{{ __('dashboard/sidebar.categories') }}</div>
             </a>
             <ul class="menu-sub">
 
@@ -74,7 +74,7 @@
         <li class="menu-item @if (Request::segment(2) == 'planes') active open @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-home"></i>
-                <div class="text-truncate" data-i18n="Dashboards">Planes</div>
+                <div class="text-truncate" data-i18n="Dashboards">{{ __('dashboard/sidebar.planes') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if (Request::segment(2) == 'planes' && Request::segment(3) == '') active @endif">
