@@ -18,7 +18,6 @@
 
 <!-- Page JS -->
 
-<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
 
 <script>
     // This function is used to toggle the password visibility
