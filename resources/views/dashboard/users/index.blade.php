@@ -58,6 +58,9 @@
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Email</span>
                                             </th>
+                                            <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
+                                                    class="dt-column-title">Status</span>
+                                            </th>
 
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">Created_at</span>
@@ -78,20 +81,21 @@
                                                 <td class="text-heading" id="{{ $user->id }}-name">
                                                     <span class="fw-medium">{{ $user->email }}</span>
                                                 </td>
-
-
-
+                                                <td id="{{ $user->id }}-status"><span
+                                                    class="badge bg-label-{{ $user->status == App\Models\User::STATUS_ACTIVE ? 'success' : 'danger' }}"
+                                                    text-capitalized="">{{ $user->status }}</span>
+                                            </td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.users.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
+                                                            onclick="showEditModalProduct('{{ route('admin.users.edit', $user->id) }}', '{{ route('admin.users.update', $user->id) }}')"
                                                             data-bs-toggle="modal"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.users.destroy', $product->id) }}"
+                                                            action="{{ route('admin.users.destroy', $user->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')

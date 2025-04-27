@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-
+        return $category;
     }
 
     /**
@@ -75,9 +75,26 @@ class CategoryController extends Controller
         $request->validate([
             'name_en' => 'required|string|max:255',
             'name_ar' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
 
-        $category->update($request->all());
+        $request_data = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            $request_data['image'] = $this->storeImage(
+                $request->file('image'),
+                $request->name . "_image_",
+                'categories/' . $request->name
+            );
+            $this->deleteImage($category->image); // Assuming you have a method to delete the old image
+        }
+
+        $category->update($request_data);
+
+        if ($request->ajax()) {
+            return response()->json(['category' => $category]);
+        }
+
         session()->flash('success', 'Category updated successfully');
         return redirect(route('admin.categories.index'));
     }

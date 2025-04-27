@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::whenSearch(request()->search)->paginate(8);
+        $products = Product::whenSearch(request()->search)->latest()->paginate(8);
         return view('dashboard.products.index', compact('products', 'categories'));
     }
 

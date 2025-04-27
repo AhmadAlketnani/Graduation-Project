@@ -14,7 +14,8 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable , MustVerifyEmail;
-
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
 
 
     /**
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
     ];
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->diffForHumans();
@@ -40,6 +42,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
 
     /**
      * Get the attributes that should be cast.

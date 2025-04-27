@@ -83,24 +83,20 @@
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.categories.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
-                                                            data-bs-toggle="modal"
-                                                            class="btn-sm btn-icon text-warning "><i
-                                                                class="icon-base ti ti-edit icon-md"></i></a>
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#editCategoryModal" {{-- onclick="showEditModalProduct('{{ route('admin.categories.edit', $category->id) }}', '{{ route('admin.categories.update', $category->id) }}')" --}}
+                                                            data-id="{{ $category->id }}"
+                                                            class="btn-sm btn-icon text-warning btn-edit">
+                                                            <i class="icon-base ti ti-edit icon-md"></i>
+                                                        </a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.categories.destroy', $product->id) }}"
+                                                            action="{{ route('admin.categories.destroy', $category->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
-
-                                                            {{-- <a href="javascript:;" class="btn btn-icon delete-record">
-                                                                <i class="icon-base bx bx-trash icon-md"></i></a> --}}
-
                                                             <button type="submit"
                                                                 class=" btn btn-icon text-danger rounded-circle delete">
-                                                                {{-- class=" btn btn-sm btn-icon text-danger rounded-circle delete"> --}}
                                                                 <i class="icon-base ti ti-trash icon-md"></i> </button>
                                                         </form>
 
@@ -111,28 +107,147 @@
                                     </tbody>
                                     <tfoot></tfoot>
                                 </table>
+                                {{-- edit modal --}}
+                                <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel3">Edit Category</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <!-- edit role form -->
+                                                <form action="" method="post" id="editCategoryForm"
+                                                    class="row mt-3 g-6" data-url="" onsubmit="return false"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('put')
+                                                    {{-- Full input  --}}
+                                                    <div class="row ">
+                                                        <div class="col mb-3">
+                                                            <label for="nameLarge" class="form-label">Name_en</label>
+                                                            <input type="text" id="nameLarge" class="form-control"
+                                                                placeholder="Enter Name_en" name="name_en">
+                                                        </div>
+                                                    </div>{{-- end of Full input --}}
+                                                    {{-- Full input  --}}
+                                                    <div class="row ">
+                                                        <div class="col mb-3">
+                                                            <label for="nameLarge" class="form-label">Name_ar</label>
+                                                            <input type="text" id="nameLarge" class="form-control"
+                                                                placeholder="Enter Name_ar" name="name_ar">
+                                                        </div>
+                                                    </div>{{-- end of Full input --}}
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-8 mb-3">
+                                                            <label for="nameLarge" class="form-label">Image</label>
+                                                            <input type="file" id="nameLarge" class="form-control"
+                                                                placeholder="Enter Name_ar" name="image">
+                                                        </div>
+                                                        <div class="col-md-4 mt-2">
+                                                            {{-- show image --}}
+                                                            <div class="image text-center">
+                                                            </div>
+                                                        </div>
+                                                    </div>{{-- end of Full input --}}
+
+                                                    {{-- half input --}}
+
+                                            </div>
+
+                                            <div class="col-12 mb-3 text-center">
+                                                <button type="submit" class="btn btn-warning me-sm-3 me-1">Edit</button>
+                                                <button type="reset" class="btn btn-label-danger"
+                                                    data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                            </div>
+                                            </form>
+                                            <!--/ Add role form -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
-                            @if ($categories->count() > 0)
-                                {{ $categories->appends(request()->query())->links() }}
-                            @else
-                                <h3 class="mt-3 text-center ">
-                                    @if (request()->search)
-                                        Sorry no category like this
-                                    @else
-                                        Sorry no data found
-                                    @endif
-                                </h3>
-                            @endif
-                        </div>
+                    </div>
+                    <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
+                        @if ($categories->count() > 0)
+                            {{ $categories->appends(request()->query())->links() }}
+                        @else
+                            <h3 class="mt-3 text-center ">
+                                @if (request()->search)
+                                    Sorry no category like this
+                                @else
+                                    Sorry no data found
+                                @endif
+                            </h3>
+                        @endif
                     </div>
                 </div>
             </div>
-            <!--/ Role Table -->
         </div>
+        <!--/ Role Table -->
     </div>
+    </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                // Handle the click event for the edit button
+                $('.btn-edit').on('click', function(e) {
+                    e.preventDefault();
+                    console.log('welcome');
 
+                    const categoryId = $(this).data('id');
+
+                    // Get the category data from the server
+                    $.ajax({
+                        url: `{{ route('admin.categories.show', ':id') }}`.replace(':id', categoryId),
+                        type: 'GET',
+                        success: function(data) {
+                            $('#editCategoryForm').attr('data-url',
+                                `{{ route('admin.categories.update', ':id') }}`.replace(':id',
+                                    categoryId));
+                            $('#editCategoryForm input[name="name_en"]').val(data.name_en);
+                            $('#editCategoryForm input[name="name_ar"]').val(data.name_ar);
+                            $('.image').html(
+                                `<img src="${data.image_url}" class="img-thumbnail" style="width: 50px; height: 50px;" alt="Category Image">`
+                            );
+
+                            // Show zoomed image on hover
+                            $('#editCategoryForm img.img-thumbnail').on('mouseover', function() {
+                                showZoomedImage($(this).attr('src'));
+                            }).on('mouseout', function() {
+                                hideZoomedImage();
+                            });
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+
+
+                // Handle the form submission
+                $('#editCategoryForm').on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url:  $(this).data('url'),
+                        data: form.serialize(),
+                        success: function(response) {
+                            // Handle success response
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(xhr) {
+                            // Handle error response
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
 
 
 @endsection

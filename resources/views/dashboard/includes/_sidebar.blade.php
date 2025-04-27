@@ -22,53 +22,165 @@
         <li class="menu-item">
             <a href="{{ route('admin.') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-              <div class="text-truncate" data-i18n="Basic">لوحة التحكم</div>
+              <div class="text-truncate" data-i18n="Basic">Dashbord</div>
             </a>
           </li>
 
-
-        <li class="menu-item open">
+{{-- User section --}}
+        <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>{{'المستخدمين'}}</div>
+                <div>{{'Users'}}</div>
             </a>
             <ul class="menu-sub">
-                {{-- <li class="menu-item">
-                    <a href="index.html" class="menu-link">
-                        <div>عرض لوحة التحكم</div>
-                    </a>
-                </li> --}}
                 <li class="menu-item @if(request()->is('admin/provider')) active @endif">
-                    <a href="{{ route('admin.') }}" class="menu-link">
-                        <div>{{'Companies'}}</div>
+                    <a href="{{ route('admin.users.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/provider')) active @endif">
+                    <a href="{{ route('admin.users.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
                     </a>
                 </li>
             </ul>
         </li>
-
-
-        <!-- Front Pages -->
-
-        <!-- e-commerce-app menu start -->
-        <li class="menu-item open">
+        <!-- User section end -->
+        <!-- Role section -->
+        <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div>إدارة الحساب</div>
+                <i class="menu-icon tf-icons ti ti-user-shield"></i>
+
+                <div>{{'Roles'}}</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="app-ecommerce-dashboard.html" class="menu-link">
-                        <div>إعدادات الحساب</div>
+                <li class="menu-item @if(request()->is('admin/role')) active @endif">
+                    <a href="{{ route('admin.roles.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="app-ecommerce-dashboard.html" class="menu-link">
-                        <div>إعدادات التطبيق</div>
+                <li class="menu-item @if(request()->is('admin/role/create')) active @endif">
+                    <a href="{{ route('admin.roles.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <!-- e-commerce-app menu end -->
+        <!-- Role section end -->
+        <!-- permission section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-key"></i>
+                <div>{{'Permissions'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/permission')) active @endif">
+                    <a href="{{ route('admin.permissions.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/permission/create')) active @endif">
+                    <a href="{{ route('admin.permissions.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- permission section end -->
+        <!-- Plane section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-plane"></i>
+                <div>{{'Planes'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/planes')) active @endif">
+                    <a href="{{ route('admin.planes.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/planes/create')) active @endif">
+                    <a href="{{ route('admin.planes.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- Plane section end -->
+        <!-- Store section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-building-store"></i>
+                <div>{{'Stores'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/store')) active @endif">
+                    <a href="{{ route('admin.stores.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/store/create')) active @endif">
+                    <a href="{{ route('admin.stores.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- Store section end -->
+        <!-- category section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-category-2"></i>
+                <div>{{'Categories'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/category')) active @endif">
+                    <a href="{{ route('admin.categories.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/category/create')) active @endif">
+                    <a href="{{ route('admin.categories.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- category section end -->
+        <!-- Product section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-package"></i>
+                <div>{{'Products'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/product')) active @endif">
+                    <a href="{{ route('admin.products.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if(request()->is('admin/product/create')) active @endif">
+                    <a href="{{ route('admin.products.create') }}" class="menu-link">
+                        <div>{{'New One'}}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- Product section end -->
+        <!-- Order section -->
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
+                <div>{{'Orders'}}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item @if(request()->is('admin/order')) active @endif">
+                    <a href="{{ route('admin.orders.index') }}" class="menu-link">
+                        <div>{{'Show All'}}</div>
+                    </a>
+                </li>
+            </ul>
+
     </ul>
 </aside>
 
@@ -137,7 +249,7 @@
 
     <ul class="menu-inner py-1">
 
-        <li class="menu-item @if (Request::segment(1) == 'admin') active open @endif">
+        <li class="menu-item @if (Request::segment(1) == 'admin') active  @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
@@ -158,7 +270,7 @@
 
 
 
-        <li class="menu-item @if (Request::segment(2) == 'planes') active open @endif">
+        <li class="menu-item @if (Request::segment(2) == 'planes') active  @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Planes</div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Ordercontroller;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\RoleController;
@@ -21,6 +22,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('permissions', PermissionController::class);
     Route::resource('planes', PlaneController::class);
     Route::resource('users', UserController::class);
+
+
+    Route::get('orders', [Ordercontroller::class, 'index'])->name('orders.index');
+    Route::post('orders/{user}', [Ordercontroller::class, 'accept'])->name('orders.accept');
+    Route::delete('orders/{user}', [Ordercontroller::class, 'reject'])->name('orders.reject');
+
 });
 require __DIR__ . "/auth.php";
 

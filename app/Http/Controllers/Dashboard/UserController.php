@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whenSearch(request()->search)->paginate(8);
+        $users = User::whenSearch(request()->search)->latest()->paginate(8);
         return view('dashboard.users.index', compact('users'));
     }
 
@@ -33,9 +33,10 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'name'=> 'required|string|max:255',
-            'email'=> 'required|email|unique:users',
-            'password'=> 'required|string|min:6',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'status' => 'sometimes|required',
         ]);
         $request->password = Hash::make($request->password);
         User::create($request->all());
@@ -67,8 +68,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'=> 'required|string|max:255',
-            'email'=> 'required|email|unique:stores',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:stores',
         ]);
         User::update($request->all());
 
@@ -86,4 +87,5 @@ class UserController extends Controller
         session()->flash('deleted', 'users deleted successfully.');
         return redirect(route('admin.users.index'));
     }
+    
 }
