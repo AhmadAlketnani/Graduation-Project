@@ -21,8 +21,8 @@
 
     <!-- Core CSS -->
 
-    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/core-dark.css') }}" class="theme-stylesheet template-customizer-core-css" />
-    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/theme-default-dark.css') }}" class="theme-stylesheet template-customizer-theme-css"/>
+    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/rtl/core.css') }}" class="theme-stylesheet template-customizer-core-css" />
+    <link rel="stylesheet" href="{{asset('dashboard-assets/vendor/css/rtl/theme-default.css') }}" class="theme-stylesheet template-customizer-theme-css"/>
 
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/demo.css') }}" />
 
@@ -39,6 +39,7 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('dashboard-assets/js/config.js') }}"></script>
+    <script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     @stack('css')

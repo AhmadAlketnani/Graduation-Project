@@ -27,20 +27,15 @@ id="layout-navbar">
                 <i class="ti ti-language rounded-circle ti-md"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <li>
-                    <a class="dropdown-item {{-- @if(lang() == 'en') active @endif --}}"
-                    href="{{ URL::to('lang/en') }}" data-language="en"
-                        data-text-direction="ltr">
-                        <span>{{'English'}}</span>
+                    <a class="dropdown-item {{ LaravelLocalization::getCurrentLocale() == $localeCode ? 'active' : '' }}"
+                    href="{{ LaravelLocalization::getLocalizedUrl($localeCode)}}" data-language="{{ $localeCode }}"
+                        data-text-direction="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+                        <span>{{ $properties['native'] }}</span>
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item {{-- @if(lang() == 'ar') active @endif --}}"
-                    href="{{ URL::to('lang/ar') }}" data-language="ar"
-                        data-text-direction="rtl">
-                        <span>{{'Arabic'}}</span>
-                    </a>
-                </li>
+                @endforeach
             </ul>
         </li>
         <!--/ Language -->
@@ -53,23 +48,23 @@ id="layout-navbar">
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                 <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="applyTheme('light')" data-theme="light">
                         <span class="align-middle"><i
                                 class="ti ti-sun ti-md me-3"></i>Light</span>
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="applyTheme('dark')" data-theme="dark">
                         <span class="align-middle"><i
                                 class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="applyTheme('system')" data-theme="system">
                         <span class="align-middle"><i
                                 class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
                     </a>
-                    
+
                 </li>
             </ul>
         </li>
@@ -385,16 +380,17 @@ id="layout-navbar">
                     </a>
                 </li>
                 <li>
-                    {{-- <div class="d-grid px-2 pt-2 pb-1">
-                        <a class="btn btn-sm btn-danger d-flex" href="{{ route('logout') }}"
+
+                        <a class="dropdown-item" href="{{ route('auth.logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <small class="align-middle">Logout</small>
-                            <i class="ti ti-logout ms-2 ti-14px"></i>
+                        <i class="ti ti-power me-3 ti-md"></i>
+                        <span>{{ __('dashboard/sidebar.logout') }}</span>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
                             @csrf
+                            @method('delete')
                         </form>
-                    </div> --}}
+
                 </li>
             </ul>
         </li>
