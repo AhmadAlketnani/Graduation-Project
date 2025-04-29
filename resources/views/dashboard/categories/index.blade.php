@@ -24,7 +24,7 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
                                             <a href="{{ route('admin.categories.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#addcategoryModal" data-bs-toggle="modal"><i
@@ -83,12 +83,10 @@
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#editCategoryModal" {{-- onclick="showEditModalProduct('{{ route('admin.categories.edit', $category->id) }}', '{{ route('admin.categories.update', $category->id) }}')" --}}
-                                                            data-id="{{ $category->id }}"
-                                                            class="btn-sm btn-icon text-warning btn-edit">
-                                                            <i class="icon-base ti ti-edit icon-md"></i>
-                                                        </a>
+                                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                                            class="btn-sm btn-icon text-warning "><i
+                                                                class="icon-base ti ti-edit icon-md"></i>
+                                                            </a>
 
                                                         <form method="post"
                                                             action="{{ route('admin.categories.destroy', $category->id) }}"
@@ -107,66 +105,7 @@
                                     </tbody>
                                     <tfoot></tfoot>
                                 </table>
-                                {{-- edit modal --}}
-                                <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel3">Edit Category</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
 
-                                                <!-- edit role form -->
-                                                <form action="" method="post" id="editCategoryForm"
-                                                    class="row mt-3 g-6" data-url="" onsubmit="return false"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('put')
-                                                    {{-- Full input  --}}
-                                                    <div class="row ">
-                                                        <div class="col mb-3">
-                                                            <label for="nameLarge" class="form-label">Name_en</label>
-                                                            <input type="text" id="nameLarge" class="form-control"
-                                                                placeholder="Enter Name_en" name="name_en">
-                                                        </div>
-                                                    </div>{{-- end of Full input --}}
-                                                    {{-- Full input  --}}
-                                                    <div class="row ">
-                                                        <div class="col mb-3">
-                                                            <label for="nameLarge" class="form-label">Name_ar</label>
-                                                            <input type="text" id="nameLarge" class="form-control"
-                                                                placeholder="Enter Name_ar" name="name_ar">
-                                                        </div>
-                                                    </div>{{-- end of Full input --}}
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-8 mb-3">
-                                                            <label for="nameLarge" class="form-label">Image</label>
-                                                            <input type="file" id="nameLarge" class="form-control"
-                                                                placeholder="Enter Name_ar" name="image">
-                                                        </div>
-                                                        <div class="col-md-4 mt-2">
-                                                            {{-- show image --}}
-                                                            <div class="image text-center">
-                                                            </div>
-                                                        </div>
-                                                    </div>{{-- end of Full input --}}
-
-                                                    {{-- half input --}}
-
-                                            </div>
-
-                                            <div class="col-12 mb-3 text-center">
-                                                <button type="submit" class="btn btn-warning me-sm-3 me-1">Edit</button>
-                                                <button type="reset" class="btn btn-label-danger"
-                                                    data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                                            </div>
-                                            </form>
-                                            <!--/ Add role form -->
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -232,7 +171,7 @@
                     e.preventDefault();
                     $.ajax({
                         type: 'POST',
-                        url:  $(this).data('url'),
+                        url: $(this).data('url'),
                         data: form.serialize(),
                         success: function(response) {
                             // Handle success response

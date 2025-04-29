@@ -24,12 +24,9 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
-                                            <a href="{{ route('admin.users.create') }}" class="btn btn-outline-success"
-                                                data-bs-target="#adduserModal" data-bs-toggle="modal"><i
-                                                    class="bx bx-plus"></i> Add</i>
-                                            </a>
+
                                         </div>{{-- end of col --}}
 
                                     </div>{{-- end of row --}}

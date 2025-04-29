@@ -95,13 +95,17 @@ class PlaneController extends Controller
 
         $plane->update($request->all());
         session()->flash('success', 'Plane updated successfully');
-        return response()->json(
-            [
-                'success' => true,
-                'message' => 'Plane updated successfully!',
-                'data' => $plane,
-            ]
-        );
+        if ($request->isJson()) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Plane updated successfully!',
+                    'data' => $plane,
+                ]
+            );
+        }
+        session()->flash('success', 'Plane created successfully');
+        return redirect(route('admin.planes.index'));
     }
 
     /**

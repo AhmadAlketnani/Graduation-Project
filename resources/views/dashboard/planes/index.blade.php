@@ -24,11 +24,11 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
-                                            <a href="{{ route("admin.planes.create") }}" class="btn btn-outline-success"
+                                            <a href="{{ route('admin.planes.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#addplaneModal" data-bs-toggle="modal"><i
-                                                    class="bx bx-plus"></i> Add</i>
+                                                class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -38,7 +38,8 @@
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
                         <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
-                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
+                            <div
+                                class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -89,7 +90,8 @@
                                                 <td><span class="fw-medium"
                                                         id="{{ $plane->id }}-QTY">{{ $plane->product_numbers }}</span>
                                                 </td>
-                                                <td><span id="{{ $plane->id }}-description">{{ $plane->period }}</span> Month
+                                                <td><span id="{{ $plane->id }}-description">{{ $plane->period }}</span>
+                                                    Month
                                                 </td>
                                                 <td id="{{ $plane->id }}-status"><span
                                                         class="badge bg-label-{{ $plane->status == App\Models\Dashboard\plane::STATUS_ACTIVE ? 'success' : 'danger' }}"
@@ -98,9 +100,7 @@
                                                 <td>{{ $plane->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.planes.edit', $plane->id) }}', '{{ route('admin.planes.update', $plane->id) }}')"
-                                                            data-bs-toggle="modal"
+                                                        <a href="{{ route('admin.planes.edit', $plane->id) }}"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 

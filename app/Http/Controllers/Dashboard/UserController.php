@@ -66,18 +66,29 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:stores',
-        ]);
-        User::update($request->all());
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'password' => 'nullable|string|min:6|confirmed', // optional + confirmation
+        'status' => 'sometimes|required',
+    ]);
 
-        session()->flash('success', 'users updated successfully.');
-        return redirect(route('admin.users.index'));
+    // تحضير البيانات
+    $data = $request->except('password'); // استثناء كلمة المرور مؤقتاً
 
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
+    }
+    if (!$request->status) {
+        $data['status'] = User::STATUS_INACTIVE;
     }
 
+    $user->update($data);
+
+    session()->flash('success', 'User updated successfully.');
+    return redirect(route('admin.users.index'));
+}
     /**
      * Remove the specified resource from storage.
      */
@@ -87,5 +98,5 @@ class UserController extends Controller
         session()->flash('deleted', 'users deleted successfully.');
         return redirect(route('admin.users.index'));
     }
-    
+
 }
