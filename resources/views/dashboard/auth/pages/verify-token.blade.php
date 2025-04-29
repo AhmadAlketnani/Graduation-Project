@@ -230,7 +230,7 @@
 
                 // Remove the stored end time
                 localStorage.removeItem("resetTimerEndTime")
-                localStorage.setItem("complete", "true")
+                localStorage.setItem("complete", true)
             }
 
             // Start the timer
@@ -269,6 +269,7 @@
                                 timer: 2000
                             });
                             // Reset the timer
+                            localStorage.setItem("complete", false)
                             startTimer()
                         } else {
                             Swal.fire({
