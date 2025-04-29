@@ -47,4 +47,6 @@
 
     <script src="{{ asset('dashboard-auth-asset/js/config.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('dashboard-assets/vendor/js/custom/theme-switcher.js')}}"></script>
+
 </head>

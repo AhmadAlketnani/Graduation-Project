@@ -274,6 +274,8 @@
             </div>
         </div>
     </div>
+
+    
     {{-- edit modal --}}
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">

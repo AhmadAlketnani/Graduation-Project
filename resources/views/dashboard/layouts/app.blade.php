@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {{-- <html direction="rtl" dir="rtl" style="direction: rtl"> --}}
-    <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default"
+    <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" data-theme="theme-default"
     data-assets-path="../../assets/" data-template="vertical-menu-template-starter" data-style="light">
 
 <!--begin::Head-->

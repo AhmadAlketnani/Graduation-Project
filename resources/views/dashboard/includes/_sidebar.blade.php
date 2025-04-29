@@ -22,15 +22,21 @@
         <li class="menu-item">
             <a href="{{ route('admin.') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
+
               <div class="text-truncate" data-i18n="Basic">Dashbord</div>
+
+                <div class="text-truncate" data-i18n="Basic">{{ __('dashboard/sidebar.dashboard') }}</div>
+
             </a>
           </li>
 
-{{-- User section --}}
+
+        {{-- User section --}}
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>{{'Users'}}</div>
+                <div>{{ __('dashboard/sidebar.users') }}</div>
+
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/provider')) active @endif">
@@ -50,6 +56,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-user-shield"></i>
+
 
                 <div>{{'Roles'}}</div>
             </a>
@@ -72,6 +79,7 @@
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-key"></i>
                 <div>{{'Permissions'}}</div>
+
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/permission')) active @endif">
@@ -90,8 +98,10 @@
         <!-- Plane section -->
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-plane"></i>
-                <div>{{'Planes'}}</div>
+
+                <i class="menu-icon tf-icons ti ti-home"></i>
+                <div class="text-truncate" data-i18n="Dashboards">{{ __('dashboard/sidebar.planes') }}</div>
+
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/planes')) active @endif">
