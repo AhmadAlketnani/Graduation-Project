@@ -48,11 +48,12 @@
                                         <div class="col-md-4  ">
 
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
-                                                Search</button>
+                                                {{ __('dashboard/table.search') }}
+                                            </button>
                                             <a href="{{ route('admin.products.create') }}" class="btn btn-outline-success"
                                                 {{-- data-bs-target="#addProductModal" data-bs-toggle="modal" --}}
                                                 ><i
-                                                class="ti ti-plus"></i> Add</i>
+                                                class="ti ti-plus"></i>  {{ __('dashboard/table.add') }}</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -77,33 +78,33 @@
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Name </span>
+                                                    class="dt-column-title">{{ __('dashboard/table.name') }}</span>
                                             </th>
 
                                             <th data-dt-column="3" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Price</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.price') }}</span>
                                             </th>
                                             <th data-dt-column="4" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">QTY</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.quantity') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Description</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.description') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Status</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.status') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Store</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.store') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Categorise</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.categories') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Created_at</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.created_at') }}</span>
                                             </th>
 
                                             <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
-                                                aria-label="Actions"><span class="dt-column-title">Actions</span></th>
+                                                aria-label="Actions"><span class="dt-column-title">{{ __('dashboard/table.actions') }}</span></th>
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
@@ -275,7 +276,7 @@
         </div>
     </div>
 
-    
+
     {{-- edit modal --}}
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">

@@ -15,21 +15,21 @@
                         @method('post')
                         @include('dashboard.includes._errors')
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">User Name</label>
+                            <label class="col-sm-2 col-form-label"> {{ __('dashboard/table.name') }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="John Doe" name="name"
                                     value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Email</label>
+                            <label class="col-sm-2 col-form-label"> {{ __('dashboard/table.email') }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="you@example.com" name="email"
                                     value="{{ old('email') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Password</label>
+                            <label class="col-sm-2 col-form-label"> {{ __('dashboard/table.password') }}</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" placeholder="John Doe" name="password">
                             </div>
@@ -38,11 +38,11 @@
 
                             <button type="submit" class="btn btn-success mr-1">
                                 <i class="ti ti-device-floppy"></i>
-                                Save
+                                {{ __('dashboard/table.save') }}
                             </button>
                             <a href="{{ route('admin.users.index') }}" class="btn btn-label-danger">
                                 <i class="ti ti-ban"></i>
-                                Cancel
+                                {{ __('dashboard/table.cancel') }}
                             </a>
 
                         </div>

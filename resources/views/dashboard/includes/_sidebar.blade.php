@@ -23,8 +23,6 @@
             <a href="{{ route('admin.') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
 
-              <div class="text-truncate" data-i18n="Basic">Dashbord</div>
-
                 <div class="text-truncate" data-i18n="Basic">{{ __('dashboard/sidebar.dashboard') }}</div>
 
             </a>
@@ -58,7 +56,7 @@
                 <i class="menu-icon tf-icons ti ti-user-shield"></i>
 
 
-                <div>{{'Roles'}}</div>
+                <div>{{ __('dashboard/sidebar.roles') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/role')) active @endif">
@@ -78,7 +76,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-key"></i>
-                <div>{{'Permissions'}}</div>
+                <div>{{ __('dashboard/sidebar.permissions') }}</div>
 
             </a>
             <ul class="menu-sub">
@@ -121,7 +119,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-building-store"></i>
-                <div>{{'Stores'}}</div>
+                <div>{{ __('dashboard/sidebar.stores') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/store')) active @endif">
@@ -141,7 +139,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-category-2"></i>
-                <div>{{'Categories'}}</div>
+                <div>{{ __('dashboard/sidebar.categories') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/category')) active @endif">
@@ -161,7 +159,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-package"></i>
-                <div>{{'Products'}}</div>
+                <div>{{ __('dashboard/sidebar.products') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/product')) active @endif">
@@ -181,7 +179,7 @@
         <li class="menu-item ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
-                <div>{{'Orders'}}</div>
+                <div>{{ __('dashboard/sidebar.orders') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/order')) active @endif">
