@@ -37,7 +37,7 @@
         <button class="btn btn-primary d-grid w-100 mb-6">Verify my account</button>
         <div class="text-center">
             Didn't get the code?
-            <a class="resend" href="javascript:void(0);" >Resend</a>
+            <a class="resend" href="javascript:void(0);">Resend</a>
         </div>
         <input type="hidden">
     </form>
@@ -46,118 +46,55 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-
-            /*   const countdownSeconds = 120;
-              const resendButton = $('.resend');
-
-              function getRemainingTime() {
-                  const storedTime = localStorage.getItem('resend_timer_start');
-                  if (storedTime) {
-                      const start = parseInt(storedTime);
-                      const elapsed = Math.floor((Date.now() - start) / 1000);
-                      return Math.max(countdownSeconds - elapsed, 0);
-                  }
-                  return 0;
-              }
-
-              function startCountdown(remaining) {
-                  resendButton.css('pointer-events', 'none').text('');
-                  const interval = setInterval(() => {
-                      if (remaining > 0) {
-                          const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
-                          const seconds = String(remaining % 60).padStart(2, '0');
-                          resendButton.text(`Resend (${minutes}:${seconds})`);
-                          resendButton.css('pointer-events', 'none');
-                          remaining--;
-                      } else {
-                          clearInterval(interval);
-                          resendButton.text('Resend');
-                          resendButton.css('pointer-events', 'auto');
-                          localStorage.removeItem('resend_timer_start');
-                          resendButton.off('click').on('click', handleResend);
-                      }
-                  }, 1000);
-              }
-
-              function handleResend() {
-                  resendButton.css('pointer-events', 'none');
-                  $.ajax({
-                      url: '{{ route('admin.auth.password.email') }}',
-                      method: 'POST',
-                      headers: {
-                          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                      },
-                      data: {
-                          email: '{{ session('reset_email') }}'
-                      },
-                      success: function(response) {
-                          if (response.success) {
-                              Swal.fire({
-                                  icon: 'success',
-                                  title: 'Verification code resent!',
-                                  text: 'A new verification code has been sent to your email.',
-                                  timer: 2000
-                              });
-                              localStorage.setItem('resend_timer_start', Date.now().toString());
-                              startCountdown(countdownSeconds);
-                          } else {
-                              Swal.fire({
-                                  icon: 'error',
-                                  title: 'Error',
-                                  text: response.message || 'Failed to resend verification code.',
-                              });
-                              resendButton.css('pointer-events', 'auto');
-                          }
-                      },
-                      error: function() {
-                          Swal.fire({
-                              icon: 'error',
-                              title: 'Error',
-                              text: 'An error occurred while resending the verification code.',
-                          });
-                          resendButton.css('pointer-events', 'auto');
-                      }
-                  });
-              }
-
-              // On page load
-              const remaining = getRemainingTime();
-              if (remaining > 0) {
-                  startCountdown(remaining);
-              } else {
-                  resendButton.text('Resend');
-                  resendButton.css('pointer-events', 'auto');
-                  resendButton.on('click', handleResend);
-              } */
-
-
-
-
-
             const inputs = document.querySelectorAll('.numeral-mask');
             const hiddenInput = document.querySelector('input[name="token"]');
 
             inputs.forEach((input, index) => {
+                // عند الكتابة اليدوية
                 input.addEventListener('input', (e) => {
                     if (e.target.value.length === e.target.maxLength) {
                         const next = inputs[index + 1];
                         if (next) next.focus();
                     }
 
-                    hiddenInput.value = Array.from(inputs).map(i => i.value).join('');
+                    updateHiddenInput();
                 });
 
+                // عند حذف بالقيمة
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Backspace' && e.target.value === '') {
                         const prev = inputs[index - 1];
                         if (prev) prev.focus();
                     }
                 });
+
+                // عند لصق الكود الكامل
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pasted = e.clipboardData.getData('text').replace(/\D/g,
+                    ''); // فقط الأرقام
+
+                    // توزيع الأرقام على الحقول
+                    inputs.forEach((input, i) => {
+                        input.value = pasted[i] || '';
+                    });
+
+                    updateHiddenInput();
+
+                    // تركيز على أول خانة فارغة بعد اللصق
+                    const firstEmpty = Array.from(inputs).find(i => i.value === '');
+                    if (firstEmpty) firstEmpty.focus();
+                });
             });
+
+            // تحديث القيمة المجمّعة في الحقل المخفي
+            function updateHiddenInput() {
+                hiddenInput.value = Array.from(inputs).map(i => i.value).join('');
+            }
+
         });
     </script>
-    {{-- <script src="{{ asset('dashboard-auth-asset/vendor/js/cutom.js') }}"></script> --}}
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Elements
