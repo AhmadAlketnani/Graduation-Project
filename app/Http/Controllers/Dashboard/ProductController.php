@@ -67,7 +67,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('dashboard.Products.edit', compact('product'));
+        $categories = Category::all();
+        $stores = Store::all();
+        return view('dashboard.Products.edit', compact('product', 'categories', 'stores'));
     }
 
     /**
@@ -80,13 +82,13 @@ class ProductController extends Controller
             'name_ar' => 'required|string|max:255',
             'price' => 'required|numeric',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:50',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'QTY' => 'required|integer',
             'description_en' => 'nullable|string',
             'description_ar' => 'nullable|string',
             'status' => "required|in:" . Product::STATUS_ACTIVE,
             Product::STATUS_INACTIVE,
-            // 'store_id' => 'required|exists:stores,id'
+            'store_id' => 'required|exists:stores,id'
         ]);
 
         $request_date = $request->except('images');

@@ -67,7 +67,8 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        return view('dashboard.stores.edit', compact('store'));
+        $users= User::all();
+        return view('dashboard.stores.edit', compact('store','users'));
     }
 
     /**
@@ -83,6 +84,12 @@ class StoreController extends Controller
             'facebook'=> 'required|string|max:255',
             'instagram'=> 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
+        ]);
+        $phoneNumber = "+970 " . $request->phone;
+
+
+        $request->merge([
+            'phone'=> $phoneNumber,
         ]);
 
         $store->update($request->all());

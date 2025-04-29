@@ -24,11 +24,11 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
                                             <a href="{{ route('admin.stores.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#addstoreModal" data-bs-toggle="modal"><i
-                                                    class="bx bx-plus"></i> Add</i>
+                                                class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -37,7 +37,7 @@
 
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
-                        <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
+                        <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table table-responsive">
                             <div
                                 class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
@@ -65,11 +65,9 @@
                                                     class="dt-column-title">Location</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Facebook</span>
+                                                    class="dt-column-title">Social Media</span>
                                             </th>
-                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Instagram</span>
-                                            </th>
+
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">User</span>
                                             </th>
@@ -97,22 +95,24 @@
                                                         id="{{ $store->id }}-phone">{{ $store->phone }}</span>
                                                 </td>
                                                 <td><span id="{{ $store->id }}-location">{{ $store->location }}</span>
-                                                    Month
                                                 </td>
-                                                <td><span id="{{ $store->id }}-facebook">{{ $store->facebook }}</span>
-                                                    Month
-                                                </td>
-                                                <td><span
-                                                        id="{{ $store->id }}-instagram">{{ $store->instagram }}</span>
-                                                    Month
+                                                <td>
+                                                    {{-- Facebook --}}
+
+                                                    <a href="{{ $store->facebook }}" target="_blank">
+                                                        <i class="ti ti-brand-facebook" title="Facebook"></i>
+                                                    </a>
+                                                    {{-- Instagram --}}
+                                                    <a href="{{ $store->instagram }}" target="_blank">
+                                                        <i class="ti ti-brand-instagram" title="Instagram"></i>
+                                                    </a>
+
                                                 </td>
                                                 <td>{{ $store->user->name }}</td>
                                                 <td>{{ $store->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.stores.edit', $store->id) }}', '{{ route('admin.stores.update', $store->id) }}')"
-                                                            data-bs-toggle="modal"
+                                                        <a href="{{ route('admin.stores.edit', $store->id) }}"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 

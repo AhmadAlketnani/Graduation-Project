@@ -24,11 +24,11 @@
 
                                         <div class="col-md-4  ">
 
-                                            <button type="submit" class="btn btn-primary "><i class="bx bx-search"></i>
+                                            <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
                                                 Search</button>
-                                            <a href="{{ route("admin.users.create") }}" class="btn btn-outline-success"
+                                            <a href="{{ route('admin.users.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#adduserModal" data-bs-toggle="modal"><i
-                                                    class="bx bx-plus"></i> Add</i>
+                                                    class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -38,7 +38,8 @@
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
                         <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
-                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
+                            <div
+                                class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -82,15 +83,13 @@
                                                     <span class="fw-medium">{{ $user->email }}</span>
                                                 </td>
                                                 <td id="{{ $user->id }}-status"><span
-                                                    class="badge bg-label-{{ $user->status == App\Models\User::STATUS_ACTIVE ? 'success' : 'danger' }}"
-                                                    text-capitalized="">{{ $user->status }}</span>
-                                            </td>
+                                                        class="badge bg-label-{{ $user->status == App\Models\User::STATUS_ACTIVE ? 'success' : 'danger' }}"
+                                                        text-capitalized="">{{ $user->status }}</span>
+                                                </td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.users.edit', $user->id) }}', '{{ route('admin.users.update', $user->id) }}')"
-                                                            data-bs-toggle="modal"
+                                                        <a href="{{ route('admin.users.edit', $user->id) }}"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 

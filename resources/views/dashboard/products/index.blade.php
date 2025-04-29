@@ -52,7 +52,7 @@
                                             <a href="{{ route('admin.products.create') }}" class="btn btn-outline-success"
                                                 {{-- data-bs-target="#addProductModal" data-bs-toggle="modal" --}}
                                                 ><i
-                                                    class="ti ti-plus"></i> Add</i>
+                                                class="ti ti-plus"></i> Add</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -139,9 +139,7 @@
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="#" data-bs-target="#editProductModal"
-                                                            onclick="showEditModalProduct('{{ route('admin.products.edit', $product->id) }}', '{{ route('admin.products.update', $product->id) }}')"
-                                                            data-bs-toggle="modal"
+                                                        <a href="{{ route('admin.products.edit', $product->id) }}"
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
