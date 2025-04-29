@@ -15,21 +15,21 @@
                         @method('post')
                         @include('dashboard.includes._errors')
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Product Name_en</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.name_en') }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="John Doe" name="name_en"
                                     value="{{ old('name_en') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Product Name_ar</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.name_ar') }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="John Doe" name="name_ar"
                                     value="{{ old('name_ar') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Product Price</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.price') }}</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" min="1" placeholder="200.00"
                                     value="{{ old('price') }}" name="price">
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Product QTY</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.quantity') }}</label>
                             <div class="col-sm-10">
                                 <input type="number" min="1" class="form-control" value="{{ old('QTY') }}"
                                     name="QTY">
@@ -45,8 +45,7 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Product
-                                Description_en</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.description_en') }}</label>
                             <div class="col-sm-10">
 
                                 <textarea name="description_en" class="form-control" placeholder="Product Description" rows="3">
@@ -56,8 +55,7 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Product
-                                Description_ar</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.description_ar') }}</label>
                             <div class="col-sm-10">
 
                                 <textarea name="description_ar" class="form-control" placeholder="Product Description" rows="3">
@@ -67,11 +65,11 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Stores</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.store') }}</label>
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
                                     <select name="store_id" class="form-select">
-                                        <option value="">All stores</option>
+                                        <option value="">{{ __('dashboard/table.store') }}</option>
                                         @foreach ($stores as $store)
                                             <option value="{{ $store->id }}"
                                                 {{ old('service_id') == $store->id ? 'selected' : '' }}>
@@ -83,10 +81,10 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Product Category</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.category') }}</label>
                             <div class="col-sm-10">
                                 <select name="categories[]" class="form-select" multiple>
-                                    <option value="">All Categorise</option>
+                                    <option value="">{{ __('dashboard/table.categories') }}</option>
                                     @foreach ($categories as $Category)
                                         <option value="{{ $Category->id }}"
                                             {{ old('category_id') == $Category->id ? 'selected' : '' }}>
@@ -97,7 +95,7 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Product Images</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.images') }}</label>
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-company2" class="input-group-text"><i
@@ -107,13 +105,13 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Product Status</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.status') }}</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-success">
                                     <input class="form-check-input" type="checkbox" id="customCheckSuccess"
                                         @checked(old('status') == App\Models\Dashboard\Product::STATUS_ACTIVE) name="status"
                                         value="{{ App\Models\Dashboard\Product::STATUS_ACTIVE }}">
-                                    <label class="form-check-label" for="customCheckSuccess">Active</label>
+                                    <label class="form-check-label" for="customCheckSuccess">{{ __('dashboard/table.active') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -122,11 +120,11 @@
 
                             <button type="submit" class="btn btn-success mr-1">
                                 <i class="ti ti-device-floppy"></i>
-                                Save
+                                {{ __('dashboard/table.save') }}
                             </button>
                             <a href="{{ route('admin.products.index') }}" class="btn btn-label-danger">
                                 <i class="ti ti-ban"></i>
-                                Cancel
+                                {{ __('dashboard/table.cancel') }}
                             </a>
 
                         </div>
