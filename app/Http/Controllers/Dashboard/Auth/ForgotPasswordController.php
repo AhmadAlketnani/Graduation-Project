@@ -30,13 +30,13 @@ class ForgotPasswordController extends Controller
             ['email' => $request->email],
             [
                 'token' => $token,
-                'expired_at' => now()->addMinutes(10),
+                'expired_at' => now()->addMinutes(2),
                 'created_at' => now()
             ]
         );
 
         // Store the token in the database or cache (e.g., using a model or Redis)
-        Cache::put('password_reset_token_' . $request->email, $token, now()->addMinutes(10));
+        Cache::put('password_reset_token_' . $request->email, $token, now()->addMinutes(2));
         Session::put('reset_email', $request->email);
 
         // Send the email
@@ -44,12 +44,14 @@ class ForgotPasswordController extends Controller
             $token
         ));
 
-        if ($request->isJson()) {
-            session()->put('success', ['title' => 'Reset Password', 'message' => 'Reset password email sent successfully.']);
-            return response()->json(['message' => 'Reset password email sent successfully.']);
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Reset password email sent successfully.'
+            ]);
         }
 
-        return redirect()->route('admin.auth.password.verify-token')
-            ->with('success', ['title' => 'Reset Password', 'message' => 'Reset password email sent successfully.']);
+        session()->flash('success', ['title' => 'Reset Password', 'message' => 'Reset password email sent successfully.']);
+        return redirect()->route('admin.auth.password.verify-token');
     }
 }

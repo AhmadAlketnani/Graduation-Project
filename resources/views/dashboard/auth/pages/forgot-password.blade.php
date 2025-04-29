@@ -27,35 +27,4 @@
     </div>
 @endsection
 
-@push('scripts')
-    {{-- <script>
-        document.getElementById('formAuthentication').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
 
-            const submitButton = document.querySelector('button[type="submit"]');
-            const form = this;
-
-            // Disable the submit button to prevent multiple submissions
-            submitButton.disabled = true;
-
-            // Simulate form submission (replace this with actual AJAX if needed)
-            setTimeout(() => {
-                // Show success message
-                const successMessage = document.createElement('div');
-                successMessage.textContent = 'Time over!';
-                successMessage.style.color = 'green';
-                successMessage.style.marginTop = '10px';
-                successMessage.id = 'successMessage';
-                form.appendChild(successMessage);
-
-                // Remove the success message after 1 minute
-                setTimeout(() => {
-                    if (successMessage) {
-                        successMessage.remove();
-                    }
-                    submitButton.disabled = false; // Re-enable the submit button
-                }, 60000); // 1 minute
-            }, 1000); // Simulate a delay for form submission
-        });
-    </script> --}}
-@endpush
