@@ -20,7 +20,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item">
-            <a href="{{ route('admin.') }}" class="menu-link">
+            <a href="{{ route('admin.') }}" class="menu-link  @if(Request::segment(2) == 'admin') active  @endif">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
 
                 <div class="text-truncate" data-i18n="Basic">{{ __('dashboard/sidebar.dashboard') }}</div>

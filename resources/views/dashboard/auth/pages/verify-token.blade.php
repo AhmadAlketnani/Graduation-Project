@@ -1,7 +1,6 @@
 @extends('dashboard.auth.layout.app')
 
 @section('content')
-
     <h4 class="mb-1">Verification Code 💬</h4>
     <p class="text-start mb-6">
         We sent a verification code to your email. Enter the code from the email in the field below.
@@ -32,13 +31,13 @@
                     maxlength="1">
             </div>
             <!-- Create a hidden field which is combined by 3 fields above -->
-            <input type="hidden" name="token" >
+            <input type="hidden" name="token">
             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
         </div>
         <button class="btn btn-primary d-grid w-100 mb-6">Verify my account</button>
         <div class="text-center">
             Didn't get the code?
-            <a class="resend" href="javascript:void(0);" onclick="handleResend()">Resend</a>
+            <a class="resend" href="javascript:void(0);">Resend</a>
         </div>
         <input type="hidden">
     </form>
@@ -47,87 +46,192 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-
-            let timerDuration = 120;
-            const resendButton = document.querySelector('.resend');
-            const updateTimer = () => {
-                if (timerDuration > 0) {
-                    const minutes = Math.floor(timerDuration / 60);
-                    const seconds = timerDuration % 60;
-                    resendButton.textContent = `Resend (${minutes}:${seconds.toString().padStart(2, '0')})`;
-                    resendButton.style.pointerEvents = 'none';
-                    resendButton.setAttribute('disabled', true);
-                    timerDuration--;
-                    setTimeout(updateTimer, 1000);
-                } else {
-                    resendButton.textContent = "Resend";
-                    resendButton.style.pointerEvents = 'auto';
-                    resendButton.removeAttribute('disabled');
-                }
-            };
-
-            const handleResend = () => {
-                fetch('{{ route('admin.auth.password.email') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            email: '{{ session('reset_email') }}'
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Verification code resent!',
-                                text: 'A new verification code has been sent to your email.',
-                                confirmButtonText: 'OK',
-                                timer: 2000,
-                            });
-                            timerDuration = 120;
-                            updateTimer();
-                        } else {
-                            throw new Error(data.message || 'Failed to resend verification code');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'An error occurred while resending the verification code.',
-                            confirmButtonText: 'OK',
-                        });
-                    });
-            };
-
-            resendButton.addEventListener('click', handleResend);
-            updateTimer();
-
             const inputs = document.querySelectorAll('.numeral-mask');
             const hiddenInput = document.querySelector('input[name="token"]');
 
             inputs.forEach((input, index) => {
+                // عند الكتابة اليدوية
                 input.addEventListener('input', (e) => {
                     if (e.target.value.length === e.target.maxLength) {
                         const next = inputs[index + 1];
                         if (next) next.focus();
                     }
 
-                    hiddenInput.value = Array.from(inputs).map(i => i.value).join('');
+                    updateHiddenInput();
                 });
 
+                // عند حذف بالقيمة
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Backspace' && e.target.value === '') {
                         const prev = inputs[index - 1];
                         if (prev) prev.focus();
                     }
                 });
+
+                // عند لصق الكود الكامل
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pasted = e.clipboardData.getData('text').replace(/\D/g,
+                    ''); // فقط الأرقام
+
+                    // توزيع الأرقام على الحقول
+                    inputs.forEach((input, i) => {
+                        input.value = pasted[i] || '';
+                    });
+
+                    updateHiddenInput();
+
+                    // تركيز على أول خانة فارغة بعد اللصق
+                    const firstEmpty = Array.from(inputs).find(i => i.value === '');
+                    if (firstEmpty) firstEmpty.focus();
+                });
             });
+
+            // تحديث القيمة المجمّعة في الحقل المخفي
+            function updateHiddenInput() {
+                hiddenInput.value = Array.from(inputs).map(i => i.value).join('');
+            }
+
         });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Elements
+            const timerElement = document.querySelector(".resend")
+
+
+            function startTimer() {
+                if (!localStorage.getItem("complete")) {
+                    // Timer duration in seconds (2 minutes)
+                    const totalDuration = 2 * 60
+
+                    // Check if there's a stored end time in localStorage
+                    let endTime
+                    const storedEndTime = localStorage.getItem("resetTimerEndTime")
+
+                    if (storedEndTime) {
+                        endTime = Number.parseInt(storedEndTime, 10)
+                    } else {
+                        // Set a new end time (current time + 2 minutes)
+                        endTime = Date.now() + totalDuration * 1000
+                        localStorage.setItem("resetTimerEndTime", endTime.toString())
+                        timerElement.disabled = true // Disable the button initially
+                        // change cursor not-allowed
+                        timerElement.style.cursor = "not-allowed"
+                    }
+
+                    // Calculate initial time left
+                    let timeLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000))
+
+                    // If timer is already complete
+                    if (timeLeft <= 0) {
+                        timerComplete()
+                    } else {
+                        // Update timer display initially
+                        updateTimerDisplay(timeLeft)
+
+                        // Set up the interval
+                        const intervalId = setInterval(() => {
+                            timeLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000))
+                            updateTimerDisplay(timeLeft)
+
+                            if (timeLeft <= 0) {
+                                clearInterval(intervalId)
+                                timerComplete()
+                            }
+                        }, 1000)
+                    }
+                }
+
+            }
+
+            // Format time as MM:SS
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60)
+                const secs = seconds % 60
+                return `Wait ${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
+            }
+
+            // Update timer display
+            function updateTimerDisplay(seconds) {
+                timerElement.textContent = formatTime(seconds)
+            }
+
+            // Handle timer completion
+            function timerComplete() {
+                timerElement.textContent = "Resend"
+                // Enable the button
+                timerElement.disabled = false
+                timerElement.style.cursor = "pointer"
+
+                // Remove the stored end time
+                localStorage.removeItem("resetTimerEndTime")
+                localStorage.setItem("complete", true)
+            }
+
+            // Start the timer
+            startTimer()
+
+            // Handle form submission
+            function handleResend() {
+                // Prevent submission if timer is not complete
+                event.preventDefault()
+                // if (timeLeft > 0) {
+                //     return
+                // }
+                Swal.showLoading()
+                // Disable the button to prevent multiple clicks
+                timerElement.disabled = true
+                timerElement.style.cursor = "not-allowed"
+                // Send AJAX request to resend the verification code
+                $.ajax({
+                    url: '{{ route('admin.auth.password.email') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        email: '{{ session('reset_email') }}'
+                    },
+                    success: function(response) {
+                        // Hide the loading spinner
+                        Swal.hideLoading()
+                        // Check if the response indicates success
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Verification code resent!',
+                                text: 'A new verification code has been sent to your email.',
+                                timer: 2000
+                            });
+                            // Reset the timer
+                            localStorage.setItem("complete", false)
+                            startTimer()
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: response.message ||
+                                    'Failed to resend verification code.',
+                            });
+                            // Enable the button
+                            timerElement.disabled = false
+                            timerElement.style.cursor = "pointer"
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred while resending the verification code.',
+                        });
+                        resendButton.css('pointer-events', 'auto');
+                    }
+                });
+                // The form will submit normally to the action URL
+            }
+            timerElement.onclick = handleResend
+        })
     </script>
 @endpush

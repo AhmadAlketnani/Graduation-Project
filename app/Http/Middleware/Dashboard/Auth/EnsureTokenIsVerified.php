@@ -17,9 +17,9 @@ class EnsureTokenIsVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('reset_email') && !Cache::has('password_reset_token_' . Session::get('reset_email'))) {
+        if (!Session::has('reset_email') && Cache::has('password_reset_token_' . Session::get('reset_email'))) {
             // Token is not verified, redirect to verify token page
-            return redirect()->route('password.verify-token')->with('error', [
+            return redirect()->route('admin.auth.password.verify-token')->with('error', [
                 'title' => 'Unauthorized',
                 'message' => 'Please verify your token before resetting your password.',
             ]);
