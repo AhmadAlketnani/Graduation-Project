@@ -151,7 +151,7 @@
                                     @if (request()->search)
                                     {{ __('dashboard/table.Sorry no store like this') }}
                                     @else
-                                    {{ __('dashboard/table.no stores found') }}
+                                    {{ __('dashboard/table.no_data_found') }}
                                     @endif
                                 </h3>
                             @endif

@@ -19,6 +19,8 @@ return [
     "product_numbers"=> "Number of products",
     "period"=> "Period",
     "password"=> "Password",
+    "rejected"=> "Rejected",
+    "rccepted"=> "Accepted",
     "confirm_password"=> "Confirm Password",
     "email"=> "Email",
     "phone"=> "Phone",

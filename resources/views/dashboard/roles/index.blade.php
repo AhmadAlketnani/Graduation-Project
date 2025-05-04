@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-12">
-            <!-- Role Table -->
+            <!-- Roles Table -->
             <div class="card">
                 <div class="card-datatable">
                     <div id="DataTables_Table_0_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
@@ -25,10 +25,11 @@
                                         <div class="col-md-4  ">
 
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
-                                                {{ __('dashboard/table.search') }}</button>
-                                            <a href="{{ route('admin.planes.create') }}" class="btn btn-outline-success"
-                                                data-bs-target="#addplaneModal" data-bs-toggle="modal"><i
-                                                class="ti ti-plus"></i> {{ __('dashboard/table.add') }} </i>
+                                                {{ __('dashboard/table.search') }}
+                                            </button>
+                                            <a href="{{ route("admin.roles.create") }}" class="btn btn-outline-success"
+                                                ><i
+                                                class="ti ti-plus"></i> {{ __('dashboard/table.add') }}</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -38,8 +39,7 @@
                             </div>{{-- end of col 12 --}}
                         </div>{{-- end of Head row --}}
                         <div class="justify-content-between dt-layouts'dashboard.layouts.app'-table">
-                            <div
-                                class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
+                            <div class="d-md-flex justify-content-between align-items-center col-12 dt-layouts'dashboard.layouts.app'-full col-md">
                                 <table class="datatables-users table border-top table-responsive dataTable dtr-column"
                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
 
@@ -52,20 +52,9 @@
                                             <th data-dt-column="1" rowspan="1" colspan="1"
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
+
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">{{ __('dashboard/table.name') }}</span>
-                                            </th>
-                                            <th data-dt-column="3" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">{{ __('dashboard/table.price') }}</span>
-                                            </th>
-                                            <th data-dt-column="4" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">{{ __('dashboard/table.product_numbers') }}</span>
-                                            </th>
-                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">{{ __('dashboard/table.period') }} </span>
-                                            </th>
-                                            <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">{{ __('dashboard/table.status') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
                                                     class="dt-column-title">{{ __('dashboard/table.created_at') }}</span>
@@ -76,46 +65,32 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
-                                        @foreach ($planes as $index => $plane)
-                                            <tr id="{{ $plane->id }}">
+                                        @foreach ($roles as $index => $role)
+                                            <tr id="{{ $role->id }}">
                                                 <td>{{ $index + 1 }}</td>
-                                                <td class="text-heading" id="{{ $plane->id }}-name">
-                                                    <span class="fw-medium">{{ $plane->name }}</span>
+
+                                                <td class="text-heading" id="{{ $role->id }}-name">
+                                                    <span class="fw-medium">{{ $role->name }}</span>
                                                 </td>
-                                                <td>
-                                                    <span class="text-truncate d-flex align-items-center text-heading"><i
-                                                            class="icon-base bx bx-dollar text-success me-2"></i><span
-                                                            id="{{ $plane->id }}-price">{{ $plane->price }}</span></span>
-                                                </td>
-                                                <td><span class="fw-medium"
-                                                        id="{{ $plane->id }}-QTY">{{ $plane->product_numbers }}</span>
-                                                </td>
-                                                <td><span id="{{ $plane->id }}-description">{{ $plane->period }}</span>
-                                                    {{ __('dashboard/table.month') }}
-                                                </td>
-                                                <td id="{{ $plane->id }}-status"><span
-                                                        class="badge bg-label-{{ $plane->status == App\Models\Dashboard\plane::STATUS_ACTIVE ? 'success' : 'danger' }}"
-                                                        text-capitalized="">{{ $plane->status }}</span>
-                                                </td>
-                                                <td>{{ $plane->created_at }}</td>
+
+
+
+                                                <td>{{ $role->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <a href="{{ route('admin.planes.edit', $plane->id) }}"
+                                                        <a href="{{ route('admin.roles.edit', $role->id) }}"
+
                                                             class="btn-sm btn-icon text-warning "><i
                                                                 class="icon-base ti ti-edit icon-md"></i></a>
 
                                                         <form method="post"
-                                                            action="{{ route('admin.planes.destroy', $plane->id) }}"
+                                                            action="{{ route('admin.roles.destroy', $role->id) }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('delete')
 
-                                                            {{-- <a href="javascript:;" class="btn btn-icon delete-record">
-                                                                <i class="icon-base bx bx-trash icon-md"></i></a> --}}
-
                                                             <button type="submit"
                                                                 class=" btn btn-icon text-danger rounded-circle delete">
-                                                                {{-- class=" btn btn-sm btn-icon text-danger rounded-circle delete"> --}}
                                                                 <i class="icon-base ti ti-trash icon-md"></i> </button>
                                                         </form>
 
@@ -129,12 +104,12 @@
                             </div>
                         </div>
                         <div class="row mx-3 justify-content-between" style="margin-top: 1rem;">
-                            @if ($planes->count() > 0)
-                                {{ $planes->appends(request()->query())->links() }}
+                            @if ($roles->count() > 0)
+                                {{ $roles->appends(request()->query())->links() }}
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                    {{ __('dashboard/table.Sorry no plan like this') }}
+                                    {{ __('dashboard/table.Sorry no role like this') }}
                                     @else
                                     {{ __('dashboard/table.no_data_found') }}
                                     @endif
@@ -144,9 +119,10 @@
                     </div>
                 </div>
             </div>
-            <!--/ Role Table -->
+            <!--/ Roles Table -->
         </div>
     </div>
+
 
 
 @endsection

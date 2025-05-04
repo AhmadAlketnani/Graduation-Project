@@ -39,12 +39,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/provider')) active @endif">
                     <a href="{{ route('admin.users.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/provider')) active @endif">
                     <a href="{{ route('admin.users.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -61,12 +61,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/role')) active @endif">
                     <a href="{{ route('admin.roles.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/role/create')) active @endif">
                     <a href="{{ route('admin.roles.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -82,12 +82,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/permission')) active @endif">
                     <a href="{{ route('admin.permissions.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/permission/create')) active @endif">
                     <a href="{{ route('admin.permissions.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -104,12 +104,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/planes')) active @endif">
                     <a href="{{ route('admin.planes.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/planes/create')) active @endif">
                     <a href="{{ route('admin.planes.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -124,12 +124,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/store')) active @endif">
                     <a href="{{ route('admin.stores.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/store/create')) active @endif">
                     <a href="{{ route('admin.stores.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -144,12 +144,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/category')) active @endif">
                     <a href="{{ route('admin.categories.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/category/create')) active @endif">
                     <a href="{{ route('admin.categories.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -164,12 +164,12 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/product')) active @endif">
                     <a href="{{ route('admin.products.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
                 <li class="menu-item @if(request()->is('admin/product/create')) active @endif">
                     <a href="{{ route('admin.products.create') }}" class="menu-link">
-                        <div>{{'New One'}}</div>
+                        <div>{{ __('dashboard/sidebar.new one') }}</div>
                     </a>
                 </li>
             </ul>
@@ -184,7 +184,7 @@
             <ul class="menu-sub">
                 <li class="menu-item @if(request()->is('admin/order')) active @endif">
                     <a href="{{ route('admin.orders.index') }}" class="menu-link">
-                        <div>{{'Show All'}}</div>
+                        <div>{{ __('dashboard/sidebar.show all') }}</div>
                     </a>
                 </li>
             </ul>

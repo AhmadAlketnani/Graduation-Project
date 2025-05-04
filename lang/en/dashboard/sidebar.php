@@ -14,4 +14,6 @@ return [
     "profile" => "Profile",
     "logout" => "Logout",
     "orders" => "Orders",
+    "new one"=> "New",
+    "show all"=> "Show All",
 ];

@@ -3,6 +3,7 @@
 namespace App\Models\Dashboard;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,9 @@ class Product extends Model
    use HasFactory;
     protected $fillable = ['name_en','name_ar', 'price', 'images', 'QTY', 'description_en','description_ar', 'status', 'store_id'];
 
-    protected $appends = ['images_url'];
+    protected $appends = ['images_url', 'name', 'description'];
+
+
     protected $casts = [
         'images' => 'array'
     ];
@@ -21,6 +24,18 @@ class Product extends Model
     const STATUS_INACTIVE = 'inactive';
 
 
+    //* Attributes
+
+    public function getNameAttribute()
+    {
+        $name = 'name_' . App::currentLocale();
+        return $this->$name;
+    }//! end of getNameAttribute
+    public function getDescriptionAttribute()
+    {
+        $description = 'description_' . App::currentLocale();
+        return $this->$description;
+    }//! end of getDescriptionAttribute
     public function getImagesUrlAttribute()
     {
         $images = [];
