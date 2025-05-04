@@ -25,10 +25,11 @@
                                         <div class="col-md-4  ">
 
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
-                                                Search</button>
+                                                {{ __('dashboard/table.search') }}
+                                            </button>
                                             <a href="{{ route("admin.permissions.create") }}" class="btn btn-outline-success"
                                                 data-bs-target="#addpermissionModal" data-bs-toggle="modal"><i
-                                                class="ti ti-plus"></i> Add</i>
+                                                class="ti ti-plus"></i> {{ __('dashboard/table.add') }}</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -53,14 +54,14 @@
                                             </th>
 
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Name</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.name') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Created_at</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.created_at') }}</span>
                                             </th>
 
                                             <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
-                                                aria-label="Actions"><span class="dt-column-title">Actions</span></th>
+                                                aria-label="Actions"><span class="dt-column-title">{{ __('dashboard/table.actions') }}</span></th>
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
@@ -113,9 +114,9 @@
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                        Sorry no permission like this
+                                    {{ __('dashboard/table.Sorry no permission like this') }}
                                     @else
-                                        Sorry no data found
+                                    {{ __('dashboard/table.no_data_found') }}
                                     @endif
                                 </h3>
                             @endif

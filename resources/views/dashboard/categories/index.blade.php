@@ -25,10 +25,10 @@
                                         <div class="col-md-4  ">
 
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
-                                                Search</button>
+                                                {{ __('dashboard/table.search') }}</button>
                                             <a href="{{ route('admin.categories.create') }}" class="btn btn-outline-success"
                                                 data-bs-target="#addcategoryModal" data-bs-toggle="modal"><i
-                                                    class="ti ti-plus"></i> Add</i>
+                                                    class="ti ti-plus"></i> {{ __('dashboard/table.add') }}</i>
                                             </a>
                                         </div>{{-- end of col --}}
 
@@ -53,17 +53,17 @@
                                                 class="dt-select dt-orderable-none" aria-label="">#
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Image</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.image') }}</span>
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Name</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.name') }}</span>
                                             </th>
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Created_at</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.created_at') }}</span>
                                             </th>
 
                                             <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
-                                                aria-label="Actions"><span class="dt-column-title">Actions</span></th>
+                                                aria-label="Actions"><span class="dt-column-title">{{ __('dashboard/table.actions') }}</span></th>
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
@@ -78,7 +78,7 @@
                                                         onmouseout="hideZoomedImage()">
                                                 </td>
                                                 <td class="text-heading" id="{{ $category->id }}-name">
-                                                    <span class="fw-medium">{{ $category->name_en }}</span>
+                                                    <span class="fw-medium">{{ $category->name }}</span>
                                                 </td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
@@ -115,9 +115,9 @@
                         @else
                             <h3 class="mt-3 text-center ">
                                 @if (request()->search)
-                                    Sorry no category like this
+                                {{ __('dashboard/table.Sorry no category like this') }}
                                 @else
-                                    Sorry no data found
+                                {{ __('dashboard/table.no_data_found') }}
                                 @endif
                             </h3>
                         @endif

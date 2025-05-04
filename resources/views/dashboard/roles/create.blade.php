@@ -6,28 +6,37 @@
 
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    
+                    <h5 class="mb-0">Basic with Icons</h5>
                     <small class="text-body-secondary float-end">Merged input group</small>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('admin.permissions.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('admin.roles.store') }}" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         @include('dashboard.includes._errors')
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.name') }}</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.name_en') }}</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="John Doe" name="name"
-                                    value="{{ old('name') }}">
+                                <input type="text" class="form-control" placeholder="John Doe" name="name_en"
+                                    value="{{ old('name_en') }}">
                             </div>
                         </div>
+                        <div class="row mb-6">
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.name_ar') }}</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="John Doe" name="name_ar"
+                                    value="{{ old('name_ar') }}">
+                            </div>
+                        </div>
+
+
                         <div class="demo-inline-spacing ">
 
                             <button type="submit" class="btn btn-success mr-1">
                                 <i class="ti ti-device-floppy"></i>
                                 {{ __('dashboard/table.save') }}
                             </button>
-                            <a href="{{ route('admin.permissions.index') }}" class="btn btn-label-danger">
+                            <a href="{{ route('admin.roles.index') }}" class="btn btn-label-danger">
                                 <i class="ti ti-ban"></i>
                                 {{ __('dashboard/table.cancel') }}
                             </a>

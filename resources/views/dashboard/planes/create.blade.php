@@ -1,13 +1,12 @@
 @extends('dashboard.layouts.app')
-
 @section('content')
     <div class="row">
         <div class="col-12">
 
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Basic with Icons</h5>
-                    <small class="text-body-secondary float-end">Merged input group</small>
+                    <h5 class="mb-0">{{ __('dashboard/table.basic with icons') }}</h5>
+                    <small class="text-body-secondary float-end">{{ __('dashboard/table.merged input group') }}</small>
                 </div>
                 <div class="card-body">
                     <form method="post" action="{{ route('admin.planes.store') }}" enctype="multipart/form-data">
@@ -15,41 +14,41 @@
                         @method('post')
                         @include('dashboard.includes._errors')
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Planes Name</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.planes name') }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="John Doe" name="name"
                                     value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Price</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.price') }}</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" placeholder="200.00" name="price"
                                     value="{{ old('product_numbers') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Product_numbers</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.product_numbers') }}</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" placeholder="30" name="product_numbers"
                                     value="{{ old('product_numbers') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label">Period</label>
+                            <label class="col-sm-2 col-form-label">{{ __('dashboard/table.period') }}</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" placeholder="6" name="period"
                                     value="{{ old('period') }}">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">Planes Status</label>
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-phone">{{ __('dashboard/table.planes status') }}</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-success">
                                     <input class="form-check-input" type="checkbox" id="customCheckSuccess"
                                         @checked(old('status') == App\Models\Dashboard\Plane::STATUS_ACTIVE) name="status"
                                         value="{{ App\Models\Dashboard\Plane::STATUS_ACTIVE }}">
-                                    <label class="form-check-label" for="customCheckSuccess">Active</label>
+                                    <label class="form-check-label" for="customCheckSuccess">{{ __('dashboard/table.active') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -57,11 +56,11 @@
 
                             <button type="submit" class="btn btn-success mr-1">
                                 <i class="ti ti-device-floppy"></i>
-                                Save
+                                {{ __('dashboard/table.save') }}
                             </button>
                             <a href="{{ route('admin.planes.index') }}" class="btn btn-label-danger">
                                 <i class="ti ti-ban"></i>
-                                Cancel
+                                {{ __('dashboard/table.cancel') }}
                             </a>
                         </div>
                     </form>

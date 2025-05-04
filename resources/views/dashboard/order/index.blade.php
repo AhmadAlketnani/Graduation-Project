@@ -25,7 +25,7 @@
                                         <div class="col-md-4  ">
 
                                             <button type="submit" class="btn btn-primary "><i class="ti ti-search"></i>
-                                                Search</button>
+                                                {{ __('dashboard/table.search') }}</button>
 
                                         </div>{{-- end of col --}}
 
@@ -51,21 +51,21 @@
                                             </th>
 
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Name</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.name') }}</span>
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Email</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.email') }}</span>
                                             </th>
                                             <th data-dt-column="2" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Status</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.status') }}</span>
                                             </th>
 
                                             <th data-dt-column="5" rowspan="1" colspan="1" tabindex="0"><span
-                                                    class="dt-column-title">Ordered_at</span>
+                                                    class="dt-column-title">{{ __('dashboard/table.ordered_at') }}</span>
                                             </th>
 
                                             <th data-dt-column="7" rowspan="1" colspan="1" class="dt-orderable-none"
-                                                aria-label="Actions"><span class="dt-column-title">Actions</span></th>
+                                                aria-label="Actions"><span class="dt-column-title">{{ __('dashboard/table.actions') }}</span></th>
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
@@ -97,12 +97,12 @@
                                                         <div class="btn btn-success"
                                                             data-url="{{ route('admin.orders.accept', $user->id) }}">
                                                             <i class="icon-base ti ti-circle-check icon-md mr-1"></i>
-                                                            Accept
+                                                            {{ __('dashboard/table.accept') }}
                                                         </div>
                                                         <div class="btn btn-outline-danger"
                                                             data-url="{{ route('admin.orders.reject', $user->id) }}">
                                                             <i class="icon-base ti ti-circle-x icon-md mr-1"></i>
-                                                            Reject
+                                                            {{ __('dashboard/table.reject') }}
                                                         </div>
 
                                                     </div>
@@ -120,9 +120,9 @@
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                        Sorry no user like this
+                                    {{ __('dashboard/table.Sorry no user like this') }}
                                     @else
-                                        Sorry no data found
+                                    {{ __('dashboard/table.no_data_found') }}
                                     @endif
                                 </h3>
                             @endif

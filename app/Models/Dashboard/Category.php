@@ -2,17 +2,28 @@
 
 namespace App\Models\Dashboard;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
     use HasFactory;
     protected $fillable = ['name_en','name_ar','image'];
 
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'name'];
+
+
+    //* Attributes
+
+    public function getNameAttribute()
+    {
+        $name = 'name_' . App::currentLocale();
+        return $this->$name;
+    }//! end of getNameAttribute
+    
 
     public function getImageUrlAttribute($val)
     {

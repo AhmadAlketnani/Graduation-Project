@@ -125,7 +125,6 @@
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
                                     {{ __('dashboard/table.Sorry no user like this') }}
-                                        Sorry no user like this
                                     @else
                                     {{ __('dashboard/table.no_data_found') }}
                                     @endif

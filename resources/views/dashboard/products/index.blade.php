@@ -124,7 +124,7 @@
                                                 </td>
                                                 <td><span
                                                         id="{{ $product->id }}-description">{{ $product->description }}</span>
-                                                    Month
+
                                                 </td>
                                                 <td id="{{ $product->id }}-status"><span
                                                         class="badge bg-label-{{ $product->status == App\Models\Dashboard\Product::STATUS_ACTIVE ? 'success' : 'danger' }}"
@@ -165,7 +165,7 @@
 
 
                                             <tr>
-                                                <td>Images</td>
+                                                <td>{{ __('dashboard/table.images') }}</td>
                                                 <td colspan="9">
                                                     <div class="d-flex flex-wrap gap-2">
                                                         @foreach ($product->images_url as $image)
@@ -200,9 +200,9 @@
                             @else
                                 <h3 class="mt-3 text-center ">
                                     @if (request()->search)
-                                        Sorry no product like this
+                                    {{ __('dashboard/table.Sorry no product like this') }}
                                     @else
-                                        Sorry no data found
+                                    {{ __('dashboard/table.no_data_found') }}
                                     @endif
                                 </h3>
                             @endif

@@ -5,7 +5,7 @@ return [
     "home" => "الرئيسية",
     "products" => "المنتجات",
     "categories" => "الفئات",
-    "stores" => "المخازن",
+    "stores" => "المتاجر",
     "users" => "المستخدمين",
     "roles" => "الأدوار",
     "permissions" => "الصلاحيات",
@@ -14,5 +14,7 @@ return [
     "profile" => "الملف الشخصي",
     "logout" => "تسجيل الخروج",
     "orders" => "الطلبات",
+    "new one"=> "جديد",
+    "show all"=> "عرض الكل",
 ];
 ?>
