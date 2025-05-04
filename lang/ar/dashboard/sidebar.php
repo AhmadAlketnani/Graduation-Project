@@ -5,7 +5,7 @@ return [
     "home" => "الرئيسية",
     "products" => "المنتجات",
     "categories" => "الفئات",
-    "stores" => "المخازن",
+    "stores" => "المتاجر",
     "users" => "المستخدمين",
     "roles" => "الأدوار",
     "permissions" => "الصلاحيات",

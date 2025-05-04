@@ -13,4 +13,5 @@ return [
     "settings" => "Settings",
     "profile" => "Profile",
     "logout" => "Logout",
+    "orders" => "Orders",
 ];

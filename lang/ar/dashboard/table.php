@@ -7,7 +7,7 @@ return [
     "price"=> "السعر",
     "quantity"=> "الكمية",
     "category"=> "الفئة",
-    "store"=> "المخزن",
+    "store"=> "المتجر",
     "user"=> "المستخدم",
     "role"=> "الدور",
     "permission"=> "الصلاحية",
